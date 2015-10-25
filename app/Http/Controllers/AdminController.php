@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Contracts\UserInterface;
 use Auth;
 
 class AdminController extends Controller
@@ -46,7 +47,7 @@ class AdminController extends Controller
     public function getDashboard()
     {
     	$data =[
-    		'bodyKlass' => 'no-skin',
+    		'bodyKlass' => 'skin-3 no-skin',
     		'authUser' => Auth::user()
     	];
     	return view('admin.dashboard',$data);
@@ -56,5 +57,16 @@ class AdminController extends Controller
     {
     	Auth::logout();
 		return redirect()->action('AdminController@getLogin');
+    }
+
+    public function getUsers(UserInterface $userRepo)
+    {
+        $users = $userRepo->getAll(Auth::user()->id);
+        $data = [
+            'bodyKlass' => 'skin-3 no-skin',
+            'authUser' => Auth::user(),
+            'users' => $users
+        ];
+        return view('admin.users',$data);
     }
 }

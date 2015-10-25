@@ -16,7 +16,7 @@
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-desktop"></i>
 				<span class="menu-text">
-					UI &amp; Elements
+					Users
 				</span>
 
 				<b class="arrow fa fa-angle-down"></b>
@@ -27,9 +27,9 @@
 			<ul class="submenu">
 
 				<li class="hover">
-					<a href="typography.html">
+					<a href="{{action('AdminController@getUsers')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Typography
+						All Users
 					</a>
 
 					<b class="arrow"></b>
