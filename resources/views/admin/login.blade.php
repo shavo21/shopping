@@ -12,7 +12,7 @@
 						<div class="login-container">
 							<div class="center">
 								<h1>
-									<img src = "{!! url('/assets/premium-on-line/logo.png') !!}" width='90px'>
+									<img src = "{!! url('/assets/images/logo.png') !!}" width='90px'>
 								</h1>
 							</div>
 
@@ -33,9 +33,6 @@
 											@endif
 											<div class="space-6"></div>
 											@include('admin.forms.admin-login-form')
-											<!-- <div class="social-or-login center">
-												<span class="bigger-110">{{trans('common.login_using')}}</span>
-											</div> -->
 											<div class="space-6"></div>
 										</div><!-- /.widget-main -->
 

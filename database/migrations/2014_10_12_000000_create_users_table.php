@@ -20,11 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password', 60);
             $table->enum('title', ['mrs', 'miss']);
-            $table->enum('role', ['user', 'admin']);
+            $table->enum('role', ['user', 'shop_admin', 'admin']);
             $table->string('profile_picture')->nullable();
             $table->string('address')->nullable();
             $table->string('mobile_phonenumber')->nullable();
-            $table->integer('grant')->default(0);
+            $table->integer('balance')->default(0);
             $table->string('password_remember');
             $table->rememberToken();
             $table->timestamps();

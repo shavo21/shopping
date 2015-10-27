@@ -14,7 +14,7 @@
 			@if($role == 'admin')
 			<a href="{{ action('AdminController@getDashboard') }}" class="navbar-brand">	
 				<small>
-					<img src = "{!! url('/assets/premium-on-line/logo.png') !!}" height='25px'>
+					<img src = "{!! url('/assets/images/logo.png') !!}" height='25px'>
 				</small>
 			</a>
 			@else
