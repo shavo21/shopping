@@ -3,15 +3,6 @@
 		try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 	</script>
 	<ul class="nav nav-list">
-		<li class="hover">
-			<a href="index.html">
-				<i class="menu-icon fa fa-tachometer"></i>
-				<span class="menu-text"> Dashboard </span>
-			</a>
-
-			<b class="arrow"></b>
-		</li>
-
 		<li class="active open hover">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-desktop"></i>
@@ -36,9 +27,9 @@
 				</li>
 
 				<li class="hover">
-					<a href="elements.html">
+					<a href="{{action('AdminController@getAddUser')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Elements
+						Add User
 					</a>
 
 					<b class="arrow"></b>
@@ -77,36 +68,6 @@
 			</ul>
 		</li>
 
-		<li class="hover">
-			<a href="#" class="dropdown-toggle">
-				<i class="menu-icon fa fa-pencil-square-o"></i>
-				<span class="menu-text"> Forms </span>
-
-				<b class="arrow fa fa-angle-down"></b>
-			</a>
-
-			<b class="arrow"></b>
-
-			<ul class="submenu">
-				<li class="hover">
-					<a href="form-elements.html">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Form Elements
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-
-				<li class="hover">
-					<a href="form-elements-2.html">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Form Elements 2
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-			</ul>
-		</li>
 	</ul><!-- /.nav-list -->
 
 	<!-- #section:basics/sidebar.layout.minimize -->
@@ -130,50 +91,6 @@
 							<i class="ace-icon fa fa-angle-double-up" data-icon1="ace-icon fa fa-angle-double-up" data-icon2="ace-icon fa fa-angle-double-down"></i>
 						</button>
 					</div>
-
-					<div class="center">
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-					</div>
-
 					<!-- PAGE CONTENT ENDS -->
 				</div><!-- /.col -->
 			</div><!-- /.row -->

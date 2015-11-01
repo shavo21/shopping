@@ -34,7 +34,7 @@ class UserService implements UserInterface{
 	public function getAll($id)
 	{
 		$users = $this->user->whereNotIn('id',[$id]);
-		return $users->paginate(5);
+		return $users->paginate(1);
 	}
 
 	public function getAllUsers($id,$web_id)

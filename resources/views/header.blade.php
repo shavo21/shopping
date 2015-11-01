@@ -10,25 +10,11 @@
 	</button>
 
 	<div class="navbar-header pull-left">
-		@if(isset($role))
-			@if($role == 'admin')
-			<a href="{{ action('AdminController@getDashboard') }}" class="navbar-brand">	
-				<small>
-					<img src = "{!! url('/assets/images/logo.png') !!}" height='25px'>
-				</small>
-			</a>
-			@else
-			<a href="{{ action('WebsitesAdminController@getDashboard', [$slug]) }}" class="navbar-brand">
-				<small>
-					<img src="{!! url('/assets/logos') !!}{!!'/'.$logo !!}" alt="Logo" height='30px' >
-				</small>
-			</a>
-			@endif
-		@else
+		<a href="{{ action('AdminController@getDashboard') }}" class="navbar-brand">	
 			<small>
-				<img src = "{!! url('/assets/premium-on-line/logo.png') !!}" height='25px'>
+				<img src = "{!! url('/assets/images/logo.png') !!}" height='25px'>
 			</small>
-		@endif	
+		</a>	
 
 	</div>
 

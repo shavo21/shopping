@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Contracts\UserInterface;
 use Auth;
+use File;
 
 class AdminController extends Controller
 {
@@ -24,7 +26,7 @@ class AdminController extends Controller
     public function getLogin()
     {
         $data=[
-        	'bodyKlass' => 'login-layout'
+        	'bodyClass' => 'login-layout'
         ];
         return view('admin.login',$data);
     }
@@ -47,7 +49,7 @@ class AdminController extends Controller
     public function getDashboard()
     {
     	$data =[
-    		'bodyKlass' => 'skin-3 no-skin',
+    		'bodyClass' => 'skin-3 no-skin',
     		'authUser' => Auth::user()
     	];
     	return view('admin.dashboard',$data);
@@ -59,14 +61,50 @@ class AdminController extends Controller
 		return redirect()->action('AdminController@getLogin');
     }
 
-    public function getUsers(UserInterface $userRepo)
+    public function getUsers(UserInterface $userRepo,Request $request)
     {
         $users = $userRepo->getAll(Auth::user()->id);
         $data = [
-            'bodyKlass' => 'skin-3 no-skin',
+            'bodyClass' => 'skin-3 no-skin',
             'authUser' => Auth::user(),
-            'users' => $users
+            'users' => $users,
+            'request' => $request->all(),
         ];
         return view('admin.users',$data);
     }
+
+    public function getEditUser($id)
+    {
+        dd($id);
+    }
+
+    public function getRemoveUser($id)
+    {
+        dd($id);
+    } 
+
+    public function getAddUser()
+    {
+        $data = [
+            'bodyClass' => 'skin-3 no-skin',
+            'action' => 'add',
+            'authUser' => Auth::user(),
+        ];
+        return view('admin.add-edit-user', $data);
+    }
+
+    public function postAddUser(UserCreateRequest $request,UserInterface $userRepo)
+    {
+        $data = $request->inputs();
+        if($data['profile_picture'] != "")
+        {
+            $path = public_path() . '/uploads/images/';
+            $name = str_random();
+            $logoFile = $request->file('profile_picture')->getClientOriginalExtension();
+            $result = $request->file('profile_picture')->move($path, $name.'.'.$logoFile);
+            $data['profile_picture'] = $name.'.'.$logoFile;
+        }
+        $user = $userRepo->createOne($data);
+    }
+
 }
