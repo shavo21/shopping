@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('login')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('password', 60);
-            $table->enum('title', ['mrs', 'miss']);
+            $table->string('user_key');
             $table->enum('role', ['user', 'shop_admin', 'admin']);
             $table->string('profile_picture')->nullable();
             $table->string('address')->nullable();

@@ -26,5 +26,23 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Contracts\UserInterface',
             'App\Services\UserService'
-        );    }
+        );
+
+        $this->app->bind(
+            'App\Contracts\TypeService',
+            'App\Services\TypeInterface'
+        );
+
+        $this->app->bind(
+            'App\Contracts\ProductService',
+            'App\Services\ProductInterface'
+        );
+
+        $this->app->bind(
+            'App\Contracts\MediaService',
+            'App\Services\MediaInterface'
+        );
+
+
+    }
 }

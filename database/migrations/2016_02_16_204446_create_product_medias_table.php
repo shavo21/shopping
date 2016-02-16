@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediasTable extends Migration
+class CreateProductMediasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateMediasTable extends Migration
      */
     public function up()
     {
-        Schema::create('medias', function (Blueprint $table) {
+        Schema::create('porduct_medias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('picture');
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateMediasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('medias');
+        Schema::drop('porduct_medias');
     }
 }
