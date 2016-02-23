@@ -22,6 +22,18 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('remove-user/{id}','AdminController@getRemoveUser');
 	Route::get('add-user','AdminController@getAddUser');
 	Route::post('add-user','AdminController@postAddUser');
+	Route::get('types','ProductController@getTypes');
+	Route::get('add-type','ProductController@getAddType');
+	Route::post('add-type','ProductController@postAddType');
+	Route::get('edit-type/{id}','ProductController@getEditType');
+	Route::put('edit-type/{id}','ProductController@putEditType');
+	Route::get('remove-type/{id}','ProductController@getRemoveType');
+	Route::get('products','ProductController@getProducts');
+	Route::get('add-product','ProductController@getAddProduct');
+	Route::post('add-product','ProductController@postAddProduct');
+	Route::get('edit-product/{id}','ProductController@getEditProduct');
+	Route::put('edit-product/{id}','ProductController@putEditProduct');
+	Route::get('remove-product/{id}','ProductController@getRemoveProduct');
 });
 
 Route::group(['prefix' => 'shop/admin'], function()

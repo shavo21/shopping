@@ -5,82 +5,81 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Contracts\TypeInterface;
+use Validator;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getTypes(TypeInterface $typeRepo)
     {
-        //
+        $types = $typeRepo->getAll();
+        dd($types);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getAddType()
     {
-        //
+        $data=[
+            'bodyClass' => 'skin-3 no-skin',
+            'action' => 'add'
+        ];
+        return view('admin.type.add-edit-type',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function postAddType(Request $request,TypeInterface $typeRepo)
     {
-        //
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'name' => 'required|unique:types',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with(['error_danger'=> trans('common.error_type')]);
+        };
+        $result = $typeRepo->create($data);
+        return redirect()->action('ProductController@getTypes');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getEditType($id,TypeInterface $typeRepo)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function putEditType($id,TypeInterface $typeRepo)
     {
-        //
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function getRemove($id,TypeInterface $typeRepo)
     {
-        //
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function getProducts(ProductInterface $productRepo)
     {
-        //
+
+    }
+
+    public function getAddProduct(TypeInterface $typeRepo)
+    {
+
+    }
+
+    public function postAddProduct(ProductInterface $productRepo)
+    {
+
+    }
+
+    public function getEditProduct($id,ProductInterface $productRepo,TypeInterface $typeRepo)
+    {
+
+    }
+
+    public function putEditProduct($id,ProductInterface $productRepo,TypeInterface $typeRepo)
+    {
+
+    }
+
+    public function getRemoveProduct($id,ProductInterface $productRepo)
+    {
+        
     }
 }

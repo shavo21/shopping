@@ -29,18 +29,18 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'App\Contracts\TypeService',
-            'App\Services\TypeInterface'
+            'App\Contracts\TypeInterface',
+            'App\Services\TypeService'
         );
 
         $this->app->bind(
-            'App\Contracts\ProductService',
-            'App\Services\ProductInterface'
+            'App\Contracts\ProductInterface',
+            'App\Services\ProductService'
         );
 
         $this->app->bind(
-            'App\Contracts\MediaService',
-            'App\Services\MediaInterface'
+            'App\Contracts\MediaInterface',
+            'App\Services\MediaService'
         );
 
 
