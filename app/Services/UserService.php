@@ -37,23 +37,16 @@ class UserService implements UserInterface{
 		return $users->paginate(1);
 	}
 
-	public function getAllUsers($id,$web_id)
-	{
-		$user = $this->user->where('website_id','=',$web_id)->get();//->whereNotIn('id',$id)
-		return $user;
-	}
-
 	/**
-	 * Get Number of all users.
+	 * Get List of all users.
 	 *
-	 *
-	 * @return response
+	 * @return Collection
 	 */
-	public function getAllCount()
+	public function getList()
 	{
-		$result = $this->user->count();
-		return $result;
- 	}
+		$users = $this->user->get();
+		return $users;
+	}
 
 	/**
 	 * Get one user.
@@ -63,7 +56,6 @@ class UserService implements UserInterface{
 	 */
 	public function getOne($id)
 	{
-		//return $this->user->where('id', $id)->with(['website'])->first();
 		return $this->user->find($id);
 	}
 
@@ -131,113 +123,6 @@ class UserService implements UserInterface{
 		File::delete($uploadPath . $newName);
 		return $usersList;
 
-	}
-
-	/**
-	 * login search.
-	 *
-	 * @param $login
-	 * @return user
-	 */
-	public function getOneByLogin($login)
-	{
-		return $this->user->where('login', '=', $login)->first();
-	}
-
-	/**
-	 * reminder search.
-	 *
-	 * @param $reminder
-	 * @return user
-	 */
-	public function getOneByReminder($reminder)
-	{
-		return $this->user->where('password_reminder', '=', $reminder)->first();
-	}
-
-	/**
-	 * update grant.
-	 *
-	 * @param $id, $grant
-	 * @return response
-	 */
-	public function updateGrant($id, $data)
-	{
-		$user = $this->getOne($id);
-		if($data['plus_minus'] == 'add')
-		{
-			$user->grant = $user->grant + $data['grant'];
-		}else{
-			$user->grant = $user->grant - $data['grant'];
-		}
-		
-		return $user->save();
-	}
-
-	/**
-	*update user coordinate
-	*
-	*@param $id, $coord
-	*
-	*/
-	public function updateCoord($id, $coord)
-	{
-		$user = $this->getOne($id);
-		return $user->update($coord);
-	}
-
-
-	/**
-	 * update grant.
-	 *
-	 * @param $id, $grant
-	 * @return response
-	 */
-	public function removeGrant($id, $grant)
-	{
-		$user = $this->getOne($id);
-		$user->grant = $user->grant - $grant;
-		return $user->save();
-	}
-
-	/**
-	 * update giftcard.
-	 *
-	 * @param $id, $giftcard
-	 * @return response
-	 */
-	public function removeGiftCard($id, $giftcard)
-	{
-		$user = $this->getOne($id);
-		$user->gift_card = $user->gift_card - $giftcard;
-		return $user->save();
-	}
-
-
-	/**
-	 * update grant.
-	 *
-	 * @param $id, $grant
-	 * @return response
-	 */
-	public function addeGrant($id, $grant)
-	{
-		$user = $this->getOne($id);
-		$user->grant = $user->grant + $grant;
-		return $user->save();
-	}
-
-	/**
-	 * update giftcard.
-	 *
-	 * @param $id, $giftcard
-	 * @return response
-	 */
-	public function addeGiftCard($id, $giftcard)
-	{
-		$user = $this->getOne($id);
-		$user->gift_card = $user->gift_card + $giftcard;
-		return $user->save();
 	}
 	
 }

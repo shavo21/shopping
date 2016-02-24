@@ -33,30 +33,55 @@ class TypeService implements TypeInterface{
 		return $types->paginate(1);
 	}
 
+	/**
+	 * Get List of all types.
+	 *
+	 * @return Collection
+	 */
 	public function getList()
 	{
 		$types = $this->type->get();
 		return $types;
 	}
 
+	/**
+	 * Get one type.
+	 *
+	 * @return Collection
+	 */
 	public function getOne($id)
 	{
 		$type  = $this->type->find($id);
 		return $type;
 	}
 
+	/**
+	 * Get create new type.
+	 *
+	 * @return Collection
+	 */
 	public function create($data)
 	{
 		$type = $this->type->create($data);
 		return $type;
 	}
 
+	/**
+	 * Get edit type data.
+	 *
+	 * @return response
+	 */
 	public function update($data,$id)
 	{
 		$result = $this->getOne($id)->update($data);
 		return $result;
 	}
 
+	/**
+	 * Get remove one type.
+	 *
+	 * @return response
+	 */
 	public function remove($id)
 	{
 		$result = $this->getOne($id)->delete();

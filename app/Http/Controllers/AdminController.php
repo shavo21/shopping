@@ -23,6 +23,12 @@ class AdminController extends Controller
 		$this->middleware('admin', ['except' => ['getLogin', 'postLogin']]);
 	}
 
+    /**
+    * Render view for logging in the application administrator.
+    * GET /admin/login
+    *
+    * @return view
+    */
     public function getLogin()
     {
         $data=[
@@ -31,6 +37,13 @@ class AdminController extends Controller
         return view('admin.login',$data);
     }
 
+    /**
+    * Login the application admin.
+    * POST /admin/login
+    *
+    * @param  Request $request
+    * @return view
+    */
     public function postLogin(Request $request)
     {
     	$login = $request->get('login');
@@ -46,6 +59,12 @@ class AdminController extends Controller
 		}
     }
 
+    /**
+    * Render dashboard view for admin.
+    * GET /admin/dashboard
+    *
+    * @return view
+    */
     public function getDashboard()
     {
     	$data =[
@@ -55,12 +74,26 @@ class AdminController extends Controller
     	return view('admin.dashboard',$data);
     }
 
+    /**
+    * Admin logout from the system.
+    * GET /admin/logout
+    *
+    * @return response
+    */
     public function getLogout()
     {
     	Auth::logout();
 		return redirect()->action('AdminController@getLogin');
     }
 
+    /**
+    * Render view for users.
+    * GET  /admin/users
+    *
+    * @param  UserInterface $userRepo,Request $request
+    *
+    * @return view
+    */
     public function getUsers(UserInterface $userRepo,Request $request)
     {
         $users = $userRepo->getAll(Auth::user()->id);
@@ -73,16 +106,39 @@ class AdminController extends Controller
         return view('admin.users',$data);
     }
 
+    /**
+    * Render view for editing user.
+    * GET  /admin/edit-user/{id}
+    *
+    * @param  UserInterface $userRepo,$id
+    *
+    * @return view
+    */
     public function getEditUser($id)
     {
         dd($id);
     }
 
+    /**
+    * Get remove user.
+    * GET  /admin/remove-user/{id}
+    *
+    * @param  UserInterface $userRepo,$id
+    *
+    * @return view
+    */
     public function getRemoveUser($id)
     {
         dd($id);
     } 
 
+    /**
+    * Get add new user.
+    * GET  /admin/add-user/{id}
+    *
+    *
+    * @return view
+    */
     public function getAddUser()
     {
         $data = [
@@ -93,6 +149,14 @@ class AdminController extends Controller
         return view('admin.add-edit-user', $data);
     }
 
+    /**
+    * Post add new user.
+    * POST  /admin/add-user/{id}
+    *
+    * @param  UserInterface $userRepo,UserInterface $request
+    *
+    * @return view
+    */
     public function postAddUser(UserCreateRequest $request,UserInterface $userRepo)
     {
         $data = $request->inputs();

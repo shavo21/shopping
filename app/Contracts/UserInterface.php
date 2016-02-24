@@ -1,6 +1,7 @@
 <?php namespace App\Contracts;
 
 interface UserInterface{
+	
 	/**
 	 * Get List of all users.
 	 *
@@ -9,15 +10,12 @@ interface UserInterface{
 	 */
 	public function getAll($id);
 
-	public function getAllUsers($id,$web_id);
-
 	/**
-	 * Get number of all users.
+	 * Get List of all users.
 	 *
-	 * 
-	 * @return count
+	 * @return Collection
 	 */
-	public function getAllCount();
+	public function getList();
 
 	/**
 	 * Get one user.
@@ -26,7 +24,6 @@ interface UserInterface{
 	 * @return User
 	 */
 	public function getOne($id);
-
 	/**
 	 * Create new user.
 	 *
@@ -53,44 +50,12 @@ interface UserInterface{
 	public function deleteOne($id);
 
 	/**
-	* Update user coordinate
-	*
-	*@param integer $id
-	*@param array $coord
-	*@return bool
-	*/
-	public function updateCoord($id, $coord);
-
-	/**
-	 * update grant.
+	 * Upload a csv file.
 	 *
-	 * @param $id, $grant
-	 * @return response
+	 * @param File $csvFile
+	 * @param string $websiteId
+	 * @return bool
 	 */
-	public function removeGrant($id, $grant);
-
-	/**
-	 * update giftcard.
-	 *
-	 * @param $id, $giftcard
-	 * @return response
-	 */
-	public function removeGiftCard($id, $giftcard);
-
-		/**
-	 * update grant.
-	 *
-	 * @param $id, $grant
-	 * @return response
-	 */
-	public function addeGrant($id, $grant);
-
-	/**
-	 * update giftcard.
-	 *
-	 * @param $id, $giftcard
-	 * @return response
-	 */
-	public function addeGiftCard($id, $giftcard);
+	public function uploadCsv($csvFile, $websiteId = null);
 
 }
