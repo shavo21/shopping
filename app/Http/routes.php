@@ -13,12 +13,13 @@
 
 Route::group(['prefix' => 'admin'], function()
 {
-	Route::get('login','AdminController@getLogin');
+	Route::get('/','AdminController@getLogin');
 	Route::post('login','AdminController@postLogin');
 	Route::get('logout','AdminController@getLogout');
 	Route::get('dashboard','AdminController@getDashboard');
 	Route::get('users','AdminController@getUsers');
 	Route::get('edit-user/{id}','AdminController@getEditUser');
+	Route::put('edit-user/{id}','AdminController@putEditUser');
 	Route::get('remove-user/{id}','AdminController@getRemoveUser');
 	Route::get('add-user','AdminController@getAddUser');
 	Route::post('add-user','AdminController@postAddUser');
@@ -36,10 +37,15 @@ Route::group(['prefix' => 'admin'], function()
 	Route::get('remove-product/{id}','ProductController@getRemoveProduct');
 });
 
-Route::group(['prefix' => 'shop/admin'], function()
+Route::group(['prefix' => 'shop-admin'], function()
 {
-	Route::get('login','AdminController@getLogin');
-	Route::post('login','AdminController@postLogin');
+	Route::get('login','ShopController@getLogin');
+	Route::post('login','ShopController@postLogin');
+	Route::get('dashboard','ShopController@getDashboard');
+	Route::get('logout','ShopController@getLogout');
+	Route::post('user','ShopController@postUser');
+	Route::get('user-page/{key}','ShopController@getUserPage');
+	Route::post('edit-balance/{id}','ShopController@postEditBalance');
 });
 
 Route::get('login','UsersController@getLogin');

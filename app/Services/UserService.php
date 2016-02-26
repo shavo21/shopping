@@ -67,7 +67,8 @@ class UserService implements UserInterface{
 	 */
 	public function createOne($userData)
 	{
-		return $this->user->create($userData);
+		$user = $this->user->create($userData);
+		return $user;
 	}
 
 	/**
@@ -94,35 +95,14 @@ class UserService implements UserInterface{
 	}
 
 	/**
-	 * Upload a csv file.
+	 * Get one user By user_key.
 	 *
-	 * @param File $csvFile
-	 * @param string $websiteId
-	 * @return bool
+	 * @param integer $user_key
+	 * @return User
 	 */
-	public function uploadCsv($csvFile, $websiteId = null)
+	public function getOneByKey($key)
 	{
-		$usersList = [];
-		$extension = $csvFile->getClientOriginalExtension();
-		$newName = str_random() . $extension;
-		$uploadPath = public_path() . '/uploads/csv/';
-		$csvFile->move($uploadPath, $newName);
-		$csvReader = Reader::createFromPath($uploadPath . $newName);
-
-		$header = $csvReader->fetchOne();
-		$users = $csvReader->setOffset(1)->fetchAssoc($header);
-		foreach ($users as $user) {
-			if($websiteId){
-				$user['website_id'] = $websiteId;
-			}
-			$password = isset($user['password']) ? $user['password'] : str_random();
-			$user['password'] = bcrypt($password);
-			$newUser = $this->createOne($user);
-			$usersList[] = $newUser;
-		}
-		File::delete($uploadPath . $newName);
-		return $usersList;
-
+		return $this->user->where('user_key',$key)->first();
 	}
 	
 }

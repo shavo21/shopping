@@ -29,7 +29,7 @@ class ProductService implements ProductInterface{
 	 */
 	public function getAll()
 	{
-		$products = $this->product;
+		$products = $this->product->with('type');
 		return $products->paginate(1);
 	}
 
@@ -51,7 +51,7 @@ class ProductService implements ProductInterface{
 	 */
 	public function getOne($id)
 	{
-		$product  = $this->product->find($id);
+		$product  = $this->product->with('type')->find($id);
 		return $product;
 	}
 

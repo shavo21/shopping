@@ -1,4 +1,4 @@
-{!! Form::open(array('action' => 'ShopAdminController@postLogin', 'id' => 'admin_login_form')) !!}
+{!! Form::open(array('action' => 'ShopController@postLogin', 'id' => 'admin_login_form')) !!}
 	<fieldset>
 		<label class="block clearfix">
 			<span class="block input-icon input-icon-right">

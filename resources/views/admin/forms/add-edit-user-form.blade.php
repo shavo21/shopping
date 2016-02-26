@@ -1,8 +1,17 @@
 @if($action == 'add')
 {!! Form::open(['action' => ['AdminController@postAddUser'], 'class' => 'form-horizontal', 'role' => 'form', 'files' => 'true' ]) !!}
 @else
-{!! Form::model($user, ['action' => ['AdminController@putEditUser',  $id], 'method' => 'PUT', 'class' => 'form-horizontal', 'role' => 'form', 'files' => 'true' ]) !!}
+{!! Form::model($userData, ['action' => ['AdminController@putEditUser',  $id], 'method' => 'PUT', 'class' => 'form-horizontal', 'role' => 'form', 'files' => 'true' ]) !!}
 @endif
+	<div class="form-group">
+		<h1>
+			@if($action == 'add')
+			{{trans('common.create_user')}}
+			@else
+			{{trans('common.edit_user')}}
+			@endif
+		</h2>
+	</div>
 	<div class="form-group">
 		{!! Form::label('first_name', trans('common.first_name'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
@@ -29,6 +38,7 @@
 			{!! Form::text('email', null, ['id' => 'login', 'class' => 'col-xs-10 col-sm-5', 'placeholder' => trans('common.email')]) !!}
 		</div>
 	</div>
+	@if($action == 'add')
 	<div class="form-group">
 		{!! Form::label('password', trans('common.password'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
@@ -38,20 +48,11 @@
 			{!! Form::password('password', ['id' => 'password', 'class' => 'col-xs-10 col-sm-5', 'placeholder' => trans('common.password')]) !!}
 		</div>
 	</div>
-	@if($action == 'add')
 	<div class="form-group">
 		{!! Form::label('password_confirmation', trans('common.password_confirmation'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
 			<b class='red' style='font-size:14px;padding-left:0.5%;'>*</b>
 			{!! Form::password('password_confirmation', ['id' => 'password_confirmation', 'class' => 'col-xs-10 col-sm-5', 'placeholder' => trans('common.password_confirmation')]) !!}
-		</div>
-	</div>
-	@endif
-	<div class="form-group">
-		{!! Form::label('title', trans('common.title'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
-		<div class="col-sm-9">
-			<b class='red' style='font-size:14px;padding-left:0.5%;'>*</b>
-			{!! Form::select('title', [ 'mr' => trans('common.mr'), 'mrs' => trans('common.mrs'), 'miss' => trans('common.miss') ], null, ['id' => 'title', 'class' => 'col-xs-10 col-sm-5']) !!}
 		</div>
 	</div>
 	<div class="form-group">
@@ -60,15 +61,16 @@
 			{!! Form::text('address', null, ['id' => 'address', 'class' => 'col-xs-10 col-sm-5', 'placeholder' => trans('common.address')]) !!}
 		</div>
 	</div>
+	@endif
 	<div class="form-group">
 		{!! Form::label('mobile_phonenumber', trans('common.mobile_phonenumber'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
 			{!! Form::text('mobile_phonenumber', null, ['id' => 'mobile_phonenumber', 'class' => 'col-xs-10 col-sm-5', 'placeholder' => trans('common.mobile_phonenumber')]) !!}
 		</div>
 	</div>
-
+	@if($action == 'add')
 	<div class="form-group">
-		{!! Form::label('profile_picture', 'profile_picture', ['class' => 'col-sm-3 control-label no-padding-right']) !!}
+		{!! Form::label('profile_picture', trans('common.profile_picture'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
 			<b class='red' style='font-size:14px;padding-left:0.5%;'>*</b>
 			<div class="col-sm-4">
@@ -95,7 +97,7 @@
 			</div>
 		</div>
 	</div>
-
+	@endif
 
 	<div class="form-group">
 		{!! Form::label('role', trans('common.role'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
@@ -104,16 +106,14 @@
 		</div>
 	</div>
 
-	<div class="clearfix form-actions">
-		<div class="col-md-offset-3 col-md-9">
-			<button id='add_user' class="btn btn-info" type="submit">
-				<i class="ace-icon fa fa-check bigger-110"></i>
-				@if($action == 'add')
-				{!! trans('common.save') !!}
-				@else
-				{!! trans('common.edit') !!}
-				@endif
-			</button>
-		</div>
+	<div class="col-md-offset-3 col-md-9">
+		<button id='add_user' class="btn btn-info" type="submit">
+			<i class="ace-icon fa fa-check bigger-110"></i>
+			@if($action == 'add')
+			{!! trans('common.save') !!}
+			@else
+			{!! trans('common.edit') !!}
+			@endif
+		</button>
 	</div>
 {!! Form::close() !!}

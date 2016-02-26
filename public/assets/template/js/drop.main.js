@@ -1,7 +1,31 @@
 $(document).ready(function(){
 	$('#id-input-file-3').ace_file_input({
 		style:'well',
-		btn_choose:'Drop files here or click to choose',
+		btn_choose:'Ընտրել Նկար',
+		btn_change:null,
+		no_icon:'ace-icon fa fa-cloud-upload',
+		droppable:true,
+		thumbnail:'small',
+		preview_error : function(filename, error_code) {
+		
+		}
+
+	}).on('change', function(){	});
+	$('#id-input-file-4').ace_file_input({
+		style:'well',
+		btn_choose:'Ընտրել Նկար',
+		btn_change:null,
+		no_icon:'ace-icon fa fa-cloud-upload',
+		droppable:true,
+		thumbnail:'small',
+		preview_error : function(filename, error_code) {
+		
+		}
+
+	}).on('change', function(){	});
+	$('#id-input-file-5').ace_file_input({
+		style:'well',
+		btn_choose:'Ընտրել Նկար',
 		btn_change:null,
 		no_icon:'ace-icon fa fa-cloud-upload',
 		droppable:true,

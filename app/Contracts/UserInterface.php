@@ -50,12 +50,11 @@ interface UserInterface{
 	public function deleteOne($id);
 
 	/**
-	 * Upload a csv file.
+	 * Get one user By user_key.
 	 *
-	 * @param File $csvFile
-	 * @param string $websiteId
-	 * @return bool
+	 * @param integer $user_key
+	 * @return User
 	 */
-	public function uploadCsv($csvFile, $websiteId = null);
+	public function getOneByKey($key);
 
 }

@@ -3,11 +3,15 @@
 		try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 	</script>
 	<ul class="nav nav-list">
+		@if(isset($user))
 		<li class="active open hover">
+		@else
+		<li class="hover">
+		@endif
 			<a href="#" class="dropdown-toggle">
-				<i class="menu-icon fa fa-desktop"></i>
+				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text">
-					Users
+					{{trans('common.users')}}
 				</span>
 
 				<b class="arrow fa fa-angle-down"></b>
@@ -20,7 +24,7 @@
 				<li class="hover">
 					<a href="{{action('AdminController@getUsers')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						All Users
+						{{trans('common.all_users')}}
 					</a>
 
 					<b class="arrow"></b>
@@ -29,18 +33,21 @@
 				<li class="hover">
 					<a href="{{action('AdminController@getAddUser')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Add User
+						{{trans('common.add_user')}}
 					</a>
 
 					<b class="arrow"></b>
 				</li>
 			</ul>
 		</li>
-
+		@if(isset($product))
+		<li class="hover active open">
+		@else
 		<li class="hover">
+		@endif
 			<a href="#" class="dropdown-toggle">
-				<i class="menu-icon fa fa-list"></i>
-				<span class="menu-text"> Tables </span>
+				<i class="menu-icon fa fa-suitcase"></i>
+				<span class="menu-text"> {{trans('common.products')}} </span>
 
 				<b class="arrow fa fa-angle-down"></b>
 			</a>
@@ -49,22 +56,41 @@
 
 			<ul class="submenu">
 				<li class="hover">
-					<a href="tables.html">
+					<a href="{{action('ProductController@getTypes')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Simple &amp; Dynamic
+						{{trans('common.types')}}
 					</a>
 
 					<b class="arrow"></b>
 				</li>
 
 				<li class="hover">
-					<a href="jqgrid.html">
+					<a href="{{action('ProductController@getAddType')}}">
 						<i class="menu-icon fa fa-caret-right"></i>
-						jqGrid plugin
+						{{trans('common.add_type')}}
 					</a>
 
 					<b class="arrow"></b>
 				</li>
+
+				<li class="hover">
+					<a href="{{action('ProductController@getProducts')}}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						{{trans('common.all_products')}}
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="hover">
+					<a href="{{action('ProductController@getAddProduct')}}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						{{trans('common.add_product')}}
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
 			</ul>
 		</li>
 
@@ -77,27 +103,3 @@
 		try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 	</script>
 </div>
-
-<!-- /section:basics/sidebar.horizontal -->
-<div class="main-content">
-	<div class="main-content-inner">
-		<div class="page-content">
-			<!-- #section:settings.box -->
-			<div class="row">
-				<div class="col-xs-12">
-					<!-- PAGE CONTENT BEGINS -->
-					<div class="hidden-sm hidden-xs">
-						<button type="button" class="sidebar-collapse btn btn-white btn-primary" data-target="#sidebar">
-							<i class="ace-icon fa fa-angle-double-up" data-icon1="ace-icon fa fa-angle-double-up" data-icon2="ace-icon fa fa-angle-double-down"></i>
-						</button>
-					</div>
-					<!-- PAGE CONTENT ENDS -->
-				</div><!-- /.col -->
-			</div><!-- /.row -->
-		</div><!-- /.page-content -->
-	</div>
-</div><!-- /.main-content -->
-
-<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-	<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-</a>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Contracts\UserInterface;
 use Auth;
 use File;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -101,7 +102,7 @@ class AdminController extends Controller
             'bodyClass' => 'skin-3 no-skin',
             'authUser' => Auth::user(),
             'users' => $users,
-            'request' => $request->all(),
+            'user' => true
         ];
         return view('admin.users',$data);
     }
@@ -114,9 +115,43 @@ class AdminController extends Controller
     *
     * @return view
     */
-    public function getEditUser($id)
+    public function getEditUser($id,UserInterface $userRepo)
     {
-        dd($id);
+        $user = $userRepo->getOne($id);
+        $data = [
+            'bodyClass' => 'skin-3 no-skin',
+            'id' => $id,
+            'userData' => $user,
+            'action' => 'edit',
+            'user' => true
+        ];
+        return view('admin.add-edit-user', $data);
+    }
+
+    /**
+    * Put edit user data.
+    * PUT  /admin/add-user/{id}
+    *
+    * @param  UserInterface $userRepo,UserInterface $request
+    *
+    * @return view
+    */
+    public function putEditUser($id,Request $request,UserInterface $userRepo)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'login' => 'required|unique:users,login,'.$id,
+            'email' => 'required|unique:users,email,'.$id,
+            'mobile_phonenumber' => 'required',
+            'role' => 'required'
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with(['error_danger'=> trans('common.error_user')]);
+        };
+        $result = $userRepo->updateOne($id,$data);
+        return redirect()->action('AdminController@getUsers');
     }
 
     /**
@@ -127,9 +162,10 @@ class AdminController extends Controller
     *
     * @return view
     */
-    public function getRemoveUser($id)
+    public function getRemoveUser($id,UserInterface $userRepo)
     {
-        dd($id);
+        $result = $userRepo->deleteOne($id);
+        return redirect()->back();
     } 
 
     /**
@@ -145,6 +181,7 @@ class AdminController extends Controller
             'bodyClass' => 'skin-3 no-skin',
             'action' => 'add',
             'authUser' => Auth::user(),
+            'user' => true
         ];
         return view('admin.add-edit-user', $data);
     }
@@ -168,7 +205,10 @@ class AdminController extends Controller
             $result = $request->file('profile_picture')->move($path, $name.'.'.$logoFile);
             $data['profile_picture'] = $name.'.'.$logoFile;
         }
+        $userKey = rand(1111111111,9999999999);
+        $data['user_key'] = $userKey;
         $user = $userRepo->createOne($data);
+        return redirect()->action('AdminController@getUsers');
     }
 
 }

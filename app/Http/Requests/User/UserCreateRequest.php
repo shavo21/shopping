@@ -27,7 +27,6 @@ class UserCreateRequest extends Request {
 			'email' => 'email|unique:users',
 			'password' => 'required|confirmed',
 			'password_confirmation' => 'required',
-			'title' => 'required',
 			'role' => 'in:user,shop_admin',
 			'login' => 'unique:users',
 		];

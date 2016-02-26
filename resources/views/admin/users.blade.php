@@ -25,6 +25,11 @@
 								@include('message')
 								</div>
 							</div>
+							<div class="form-group">
+								<h1>
+									trans('common.users_table')
+								</h1>
+							</div>
 							<table id="simple-table" class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
@@ -57,7 +62,7 @@
 									@endforeach 
 								</tbody>
 							</table>
-							{!! $users->appends($request)->render() !!}
+							{!! $users->render() !!}
 						</div><!-- /.span -->
 
 					</div><!-- /.row -->
@@ -69,9 +74,9 @@
 	<div class="modal fade" id='myModalDelete' tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content col-md-12">
-				<h1 id = 'modal_h1'>{{trans('common.delete_status')}}
+				<h2 id = 'modal_h1'>{{trans('common.delete_status')}}
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</h1>
+				</h2>
 				<a class='delete_one' style='float:left;padding:15px 20px;' href='#'><button class="pull-right btn btn-sm btn-danger">{{trans('common.delete')}}</button></a>
 				<a class='delete_one' style='float:right;padding:15px 20px;' href='#'><button class="pull-right btn btn-sm btn" data-dismiss="modal" aria-label="Close">{{trans('common.cancel')}}</button></a>
 			</div>

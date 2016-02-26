@@ -6,10 +6,20 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Contracts\TypeInterface;
+use App\Contracts\ProductInterface;
 use Validator;
 
 class ProductController extends Controller
 {
+    /**
+     * Create a new instance of WebsitesController class.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('admin', ['except' => ['getLogin', 'postLogin']]);
+    }
     /**
     * Render types list view for admin.
     * GET /admin/types
@@ -22,7 +32,8 @@ class ProductController extends Controller
         $types = $typeRepo->getAll();
         $data = [
             'bodyClass' => 'skin-3 no-skin',
-            'types' => $types
+            'types' => $types,
+            'product' => true
         ];
         return view('admin.type.types',$data);
     }
@@ -35,9 +46,10 @@ class ProductController extends Controller
     */
     public function getAddType()
     {
-        $data=[
+        $data = [
             'bodyClass' => 'skin-3 no-skin',
-            'action' => 'add'
+            'action' => 'add',
+            'product' => true
         ];
         return view('admin.type.add-edit-type',$data);
     }
@@ -57,7 +69,7 @@ class ProductController extends Controller
             'name' => 'required|unique:types',
         ]);
         if($validator->fails()){
-            return redirect()->back()->with(['error_danger'=> trans('common.error_type')]);
+            return redirect()->back();
         };
         $result = $typeRepo->create($data);
         return redirect()->action('ProductController@getTypes');
@@ -78,7 +90,8 @@ class ProductController extends Controller
             'bodyClass' => 'skin-3 no-skin',
             'id' => $id,
             'type' => $type,
-            'action' => 'edit'
+            'action' => 'edit',
+            'product' => true
         ];
         return view('admin.type.add-edit-type',$data);
     }
@@ -89,18 +102,19 @@ class ProductController extends Controller
     *
     * @param  integer $id
     * @param  TypeInterface $typeRepo
+    * @param  Request $request
     * @return response
     */
-    public function putEditType($id,TypeInterface $typeRepo)
+    public function putEditType($id,TypeInterface $typeRepo,Request $request)
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'name' => 'required|unique:types'.$id,
+            'name' => 'required|unique:types,name,'.$id,
         ]);
         if($validator->fails()){
             return redirect()->back()->with(['error_danger'=> trans('common.error_type')]);
         };
-        $result = $typeRepo->update($id,$data);
+        $result = $typeRepo->update($data,$id);
         return redirect()->action('ProductController@getTypes');
     }
 
@@ -112,7 +126,7 @@ class ProductController extends Controller
     * @param  TypeInterface $typeRepo
     * @return response
     */
-    public function getRemove($id,TypeInterface $typeRepo)
+    public function getRemoveType($id,TypeInterface $typeRepo)
     {
         $result = $typeRepo->remove($id);
         return redirect()->back();
@@ -130,7 +144,8 @@ class ProductController extends Controller
         $products = $productRepo->getAll();
         $data = [
             'bodyClass' => 'skin-3 no-skin',
-            'products' => $products
+            'products' => $products,
+            'product' => true
         ];
         return view('admin.product.products',$data);
     }
@@ -152,7 +167,8 @@ class ProductController extends Controller
         $data=[
             'bodyClass' => 'skin-3 no-skin',
             'action' => 'add',
-            'types' => $typeData
+            'types' => $typeData,
+            'product' => true
         ];
         return view('admin.product.add-edit-product',$data);
     }
@@ -172,10 +188,28 @@ class ProductController extends Controller
             'name' => 'required|unique:products',
             'count' => 'required|integer',
             'price' => 'required|integer',
+            'product_picture1' => 'required'
         ]);
         if($validator->fails()){
             return redirect()->back()->with(['error_danger'=> trans('common.error_product')]);
         };
+        $path = public_path() . '/uploads/images/products/';
+        $name1 = str_random();
+        $logoFile1 = $request->file('product_picture1')->getClientOriginalExtension();
+        $result = $request->file('product_picture1')->move($path, $name1.'.'.$logoFile1);
+        $data['product_picture1'] = $name1.'.'.$logoFile1;
+        if($data['product_picture2'] != ""){
+            $name2 = str_random();
+            $logoFile2 = $request->file('product_picture2')->getClientOriginalExtension();
+            $result = $request->file('product_picture2')->move($path, $name2.'.'.$logoFile2);
+            $data['product_picture2'] = $name2.'.'.$logoFile1;
+        }
+        if($data['product_picture3'] != ""){
+            $name3 = str_random();
+            $logoFile3 = $request->file('product_picture3')->getClientOriginalExtension();
+            $result = $request->file('product_picture3')->move($path, $name3.'.'.$logoFile3);
+            $data['product_picture3'] = $name3.'.'.$logoFile1;
+        }
         $result = $productRepo->create($data);
         return redirect()->action('ProductController@getProducts');
     }
@@ -201,7 +235,9 @@ class ProductController extends Controller
             'bodyClass' => 'skin-3 no-skin',
             'action' => 'edit',
             'types' => $typeData,
-            'product' => $product
+            'productData' => $product,
+            'product' => true,
+            'id' => $id
         ];
         return view('admin.product.add-edit-product',$data);
     }
@@ -213,20 +249,40 @@ class ProductController extends Controller
     * @param  integer $id
     * @param  ProductInterface $productRepo
     * @param  TypeInterface $typeRepo
+    * @param  Request $request
     * @return response
     */
-    public function putEditProduct($id,ProductInterface $productRepo,TypeInterface $typeRepo)
+    public function putEditProduct($id,ProductInterface $productRepo,TypeInterface $typeRepo,Request $request)
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'name' => 'required|unique:products'.$id,
+            'name' => 'required|unique:products,name,'.$id,
             'count' => 'required|integer',
             'price' => 'required|integer',
         ]);
         if($validator->fails()){
             return redirect()->back()->with(['error_danger'=> trans('common.error_product')]);
         };
-        $result = $productRepo->update($id,$data);
+        $path = public_path() . '/uploads/images/products/';
+        if(isset($data['product_picture1'])){
+            $name1 = str_random();
+            $logoFile1 = $request->file('product_picture1')->getClientOriginalExtension();
+            $result = $request->file('product_picture1')->move($path, $name1.'.'.$logoFile1);
+            $data['product_picture1'] = $name1.'.'.$logoFile1;
+        }
+        if(isset($data['product_picture2'])){
+            $name2 = str_random();
+            $logoFile2 = $request->file('product_picture2')->getClientOriginalExtension();
+            $result = $request->file('product_picture2')->move($path, $name2.'.'.$logoFile2);
+            $data['product_picture2'] = $name2.'.'.$logoFile1;
+        }
+        if(isset($data['product_picture3'])){
+            $name3 = str_random();
+            $logoFile3 = $request->file('product_picture3')->getClientOriginalExtension();
+            $result = $request->file('product_picture3')->move($path, $name3.'.'.$logoFile3);
+            $data['product_picture3'] = $name3.'.'.$logoFile1;
+        }
+        $result = $productRepo->update($data,$id);
         return redirect()->action('ProductController@getProducts');
     }
 
