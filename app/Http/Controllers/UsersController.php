@@ -16,6 +16,16 @@ class UsersController extends Controller
     */
     public function getLogin()
     {
-        dd('user');
+        return view('public.login');
+    }
+
+    public function getDashboard()
+    {
+        return view('public.dashboard');
+    }
+
+    public function getRegistration()
+    {
+        return view('public.registration');
     }
 }

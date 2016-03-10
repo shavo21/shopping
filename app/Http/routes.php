@@ -48,4 +48,6 @@ Route::group(['prefix' => 'shop-admin'], function()
 	Route::post('edit-balance/{id}','ShopController@postEditBalance');
 });
 
+Route::get('/','UsersController@getDashboard');
 Route::get('login','UsersController@getLogin');
+Route::get('registration','UsersController@getRegistration');
