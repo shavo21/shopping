@@ -51,3 +51,5 @@ Route::group(['prefix' => 'shop-admin'], function()
 Route::get('/','UsersController@getDashboard');
 Route::get('login','UsersController@getLogin');
 Route::get('registration','UsersController@getRegistration');
+Route::get('products/{type}','UsersController@getProducts');
+Route::get('product/{type}/{name}','UsersController@getProduct');

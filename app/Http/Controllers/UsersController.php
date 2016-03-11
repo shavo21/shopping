@@ -28,4 +28,45 @@ class UsersController extends Controller
     {
         return view('public.registration');
     }
+
+    public function getProducts($type)
+    {
+        $products = [
+            '1' => 1,
+            '2' => 2,
+            '3' => 3,
+            '4' => 4,
+            '5' => 5,
+            '6' => 6,
+            '7' => 7,
+            '8' => 8,
+            '9' => 9
+        ];
+        $data = [
+            'products' => $products,
+            'type' => $type
+        ];
+        return view('public.products',$data);
+    }
+
+    public function getProduct($type,$id)
+    {
+        $products = [
+            '1' => 1,
+            '2' => 2,
+            '3' => 3,
+            '4' => 4,
+            '5' => 5,
+            '6' => 6,
+            '7' => 7,
+            '8' => 8,
+            '9' => 9
+        ];
+        $data = [
+            'products' => $products,
+            'type' => $type,
+            'id' => $id
+        ];
+        return view('public.one-product',$data);
+    }
 }
