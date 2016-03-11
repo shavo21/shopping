@@ -19,16 +19,34 @@ class UsersController extends Controller
         return view('public.login');
     }
 
+    /**
+    * Render view for logging in the user.
+    * GET /login
+    *
+    * @return view
+    */
     public function getDashboard()
     {
         return view('public.dashboard');
     }
 
+    /**
+    * Render view for logging in the user.
+    * GET /login
+    *
+    * @return view
+    */
     public function getRegistration()
     {
         return view('public.registration');
     }
 
+    /**
+    * Render view for logging in the user.
+    * GET /login
+    *
+    * @return view
+    */
     public function getProducts($type)
     {
         $products = [
