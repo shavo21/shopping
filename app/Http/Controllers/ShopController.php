@@ -11,6 +11,16 @@ use Validator;
 
 class ShopController extends Controller
 {
+    
+    /**
+     * Create a new instance of WebsitesController class.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('shop', ['except' => ['getLogin', 'postLogin']]);
+    }
     /**
     * Render view for logging in the application shop-administrator.
     * GET /shop-admin/login
@@ -136,9 +146,10 @@ class ShopController extends Controller
         if($validator->fails()){
             return redirect()->back()->with(['error_danger'=> trans('common.error_balance')]);
         };
-        $dataUpdate['balance'] = $data['balance']*$data['percent']*0.01;
+        $user = $userRepo->getOne($id);
+        $dataUpdate['balance'] = $user->balance + $data['balance']*$data['percent']*0.01;
         $result = $userRepo->updateOne($id,$dataUpdate);
-        return redirect()->action('ShopController@getDashboard');
+        return redirect()->action('ShopController@getDashboard')->with(['error'=> trans('common.error_success_balance')]);;
     }
 
 }

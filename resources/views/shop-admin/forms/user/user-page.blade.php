@@ -1,10 +1,5 @@
 {!! Form::open(['action' => ['ShopController@postEditBalance',$user->id], 'class' => 'form-horizontal', 'role' => 'form', 'files' => 'true' ]) !!}
 	<div class="form-group">
-		<h1>
-			{{trans('common.user_page')}}
-		</h1>
-	</div>
-	<div class="form-group">
 		{!! Form::label('balance', trans('common.balance'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
 			<b class='red' style='font-size:14px;padding-left:0.5%;'>*</b>
