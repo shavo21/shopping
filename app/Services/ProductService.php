@@ -30,7 +30,7 @@ class ProductService implements ProductInterface{
 	public function getAll()
 	{
 		$products = $this->product->with('type');
-		return $products->paginate(1);
+		return $products->paginate(5);
 	}
 
 	/**
@@ -51,7 +51,7 @@ class ProductService implements ProductInterface{
 	 */
 	public function getOne($id)
 	{
-		$product  = $this->product->with('type')->find($id);
+		$product  = $this->product->with('type')->with('type')->find($id);
 		return $product;
 	}
 
@@ -86,5 +86,49 @@ class ProductService implements ProductInterface{
 	{
 		$result = $this->getOne($id)->delete();
 		return $result;
+	}
+
+	/**
+	 * Get products by type_id.
+	 *
+	 * @return products
+	 */
+	public function getProductByeType($id)
+	{
+		$products = $this->product->where('type_id',$id)->with('type')->get();
+		return $products;
+	}
+
+	/**
+	 * Get products order by id desc.
+	 *
+	 * @return products
+	 */
+	public function getProductSlide($limit)
+	{
+		$products = $this->product->orderBy('id', 'desc')->with('type')->limit($limit)->get();
+		return $products;
+	}
+
+	/**
+	* Get products by new_price.
+	*
+	* @return products
+	*/
+	public function getProductByPrice($limit)
+	{
+		$products = $this->product->orderBy('id', 'desc')->where('new_price','!=','')->with('type')->limit($limit)->get();
+		return $products;
+	}
+
+	/**
+	* Get products by price.
+	*
+	* @return products
+	*/
+	public function getProductMain($limit)
+	{
+		$products = $this->product->orderBy('id', 'desc')->where('new_price','')->with('type')->limit($limit)->get();
+		return $products;
 	}
 }

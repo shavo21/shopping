@@ -53,13 +53,9 @@
                                 Ապրանքներ
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="index.html">Shop UI</a></li>
-                                <li><a href="shop-ui-inner.html">Product Page</a></li>
-                                <li><a href="shop-ui-filter-grid.html">Filter Grid Page</a></li>
-                                <li><a href="shop-ui-filter-list.html">Filter List Page</a></li>
-                                <li><a href="shop-ui-add-to-cart.html">Checkout</a></li>
-                                <li><a href="shop-ui-login.html">Login</a></li>
-                                <li><a href="shop-ui-register.html">Register</a></li>
+                                @foreach($types as $type)
+                                <li class=""><a href="{{action('UsersController@getProducts',$type->id)}}">{{$type->name}}</a></li>
+                                @endforeach
                             </ul>
                         </li>
                         <!-- End Pages -->

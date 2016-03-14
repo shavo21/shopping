@@ -185,7 +185,7 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'name' => 'required|unique:products',
+            'name' => 'required',
             'count' => 'required|integer',
             'price' => 'required|integer',
             'product_picture1' => 'required'

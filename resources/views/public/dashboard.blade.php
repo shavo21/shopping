@@ -8,141 +8,14 @@
         <div class="tp-banner">
             <ul>
                 <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան 1">
+                @foreach($slideProducts as $key => $slideProduct)
+                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան {{$key+1}}">
                     <!-- MAIN IMAGE -->
-                    <img src="assets/img/1.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-
-                    <div class="tp-caption revolution-ch1 sft start"
-                        data-x="center"
-                        data-hoffset="0"
-                        data-y="100"
-                        data-speed="1500"
-                        data-start="500"
-                        data-easing="Back.easeInOut"
-                        data-endeasing="Power1.easeIn"                        
-                        data-endspeed="300">
-                        մեր նոր <br>
-                        <strong>տեսականին</strong><br>
-                        այստեղ է
-                    </div>
-
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                        data-x="center"
-                        data-hoffset="0"
-                        data-y="380"
-                        data-speed="1600"
-                        data-start="1800"
-                        data-easing="Power4.easeOut"
-                        data-endspeed="300"
-                        data-endeasing="Power1.easeIn"
-                        data-captionhidden="off"
-                        style="z-index: 6">
-                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">Գնել հիմա</a>
-                    </div>
+                    <img src="/uploads/images/products/{{$slideProduct->product_picture1}}"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                 </li>
                 <!-- END SLIDE -->
+                @endforeach
 
-                <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան 2">
-                    <!-- MAIN IMAGE -->
-                    <img src="assets/img/5.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                        data-x="center"
-                        data-hoffset="0"
-                        data-y="300"
-                        data-speed="1600"
-                        data-start="1800"
-                        data-easing="Power4.easeOut"
-                        data-endspeed="300"
-                        data-endeasing="Power1.easeIn"
-                        data-captionhidden="off"
-                        style="z-index: 6">
-                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">Գնել հիմա</a>
-                    </div>
-                </li>
-                <!-- END SLIDE -->
-
-                <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան 3">
-                    <!-- MAIN IMAGE -->
-                    <img src="assets/img/3.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="right top" data-bgrepeat="no-repeat">
-
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                        data-x="right"
-                        data-hoffset="0"
-                        data-y="300"
-                        data-speed="1600"
-                        data-start="2800"
-                        data-easing="Power4.easeOut"
-                        data-endspeed="300"
-                        data-endeasing="Power1.easeIn"
-                        data-captionhidden="off"
-                        style="z-index: 6">
-                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">Գնել հիմա</a>
-                    </div>
-                </li>
-                <!-- END SLIDE -->
-
-                <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան 4">
-                    <!-- MAIN IMAGE -->
-                    <img src="assets/img/2.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-
-                    <div class="tp-caption revolution-ch1 sft start"
-                        data-x="center"
-                        data-hoffset="0"
-                        data-y="100"
-                        data-speed="1500"
-                        data-start="500"
-                        data-easing="Back.easeInOut"
-                        data-endeasing="Power1.easeIn"                        
-                        data-endspeed="300">
-                       Կանացի Աքսեսուարներ
-                    </div>
-
-
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                        data-x="center"
-                        data-hoffset="0"
-                        data-y="370"
-                        data-speed="1600"
-                        data-start="2800"
-                        data-easing="Power4.easeOut"
-                        data-endspeed="300"
-                        data-endeasing="Power1.easeIn"
-                        data-captionhidden="off"
-                        style="z-index: 6">
-                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">Գնել հիմա</a>
-                    </div>
-                </li>
-                <!-- END SLIDE -->                
-
-                <!-- SLIDE -->
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000" data-title="Տեսարան 5">
-                    <!-- MAIN IMAGE -->
-                    <img src="assets/img/4.jpg"  alt="darkblurbg"  data-bgfit="cover" data-bgposition="right top" data-bgrepeat="no-repeat">
-
-                    <!-- LAYER -->
-                    <div class="tp-caption sft"
-                        data-x="right"
-                        data-hoffset="0"
-                        data-y="300"
-                        data-speed="1600"
-                        data-start="2800"
-                        data-easing="Power4.easeOut"
-                        data-endspeed="300"
-                        data-endeasing="Power1.easeIn"
-                        data-captionhidden="off"
-                        style="z-index: 6">
-                        <a href="#" class="btn-u btn-brd btn-brd-hover btn-u-light">Գնել հիմա</a>
-                    </div>
-                </li>
-                <!-- END SLIDE -->
             </ul>
             <div class="tp-bannertimer tp-bottom"></div>            
         </div>
@@ -153,30 +26,20 @@
     <div class="container content-md">
         <!--=== Illustration v1 ===-->
         <div class="row margin-bottom-60">
-            <div class="col-md-6 md-margin-bottom-30">
+            @foreach($newPriceProducts as $newPriceProduct)
+            <div class="col-md-6">
                 <div class="overflow-h">
                     <div class="illustration-v1 illustration-img1">
                         <div class="illustration-bg">
-                            <div class="illustration-ads ad-details-v1">
+                            <div class="illustration-ads ad-details-v1" style="background-image:url('/uploads/images/products/{{$newPriceProduct->product_picture1}}')">
                                 <h3>Նոր զեղչ 30% - 60%</h3>
-                                <a class="btn-u btn-brd btn-brd-hover btn-u-light" href="#">Գնել Հիմա</a>
+                                <a class="btn-u btn-brd btn-brd-hover btn-u-light" href="{{action('UsersController@getProduct',[$newPriceProduct->type->id,$newPriceProduct->id])}}">Գնել Հիմա</a>
                             </div>    
                         </div>    
                     </div>
                 </div>    
             </div>
-            <div class="col-md-6">
-                <div class="overflow-h">
-                    <a class="illustration-v1 illustration-img2" href="#">
-                        <span class="illustration-bg">
-                            <span class="illustration-ads ad-details-v2">
-                                <span class="item-time">Գարուն 2016</span>
-                                <span class="item-name">Lacoste</span>
-                            </span>
-                        </span>
-                    </a>
-                </div>    
-            </div>
+            @endforeach
         </div><!--/end row-->
         <!--=== End Illustration v1 ===-->
 
@@ -193,117 +56,38 @@
             </div>
 
             <ul class="list-inline owl-slider">
+                @foreach($mainProducts as $mainProduct)
                 <li class="item">
                     <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/09.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
+                        <a href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">
+                            @if($mainProduct->product_picture2 != '')
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture2}}" style="width:265px;height:397px">
+                            @else
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture1}}" style="width:265px;height:397px">
+                            @endif
+                        </a>
+                        <a class="product-review" href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">Արագ Անցում</a>
                         <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    </div>
-                    <div class="product-description product-description-brd">
-                        <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">Անուն</span>
-                            </div>    
-                            <div class="product-price">
-                                <span class="title-price">$95.00</span>
-                            </div>
-                        </div>       
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/26.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    </div> 
-                    <div class="product-description product-description-brd">
-                        <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">անուն</span>
-                            </div>    
-                            <div class="product-price">
-                                <span class="title-price">$60.00</span>
-                                <span class="title-price line-through">$95.00</span>
-                            </div>
-                        </div>       
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/11.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    </div> 
-                    <div class="product-description product-description-brd">
-                        <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">անուն</span>
-                            </div>    
-                            <div class="product-price">
-                                <span class="title-price">$95.00</span>
-                            </div>
-                        </div>      
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/12.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                        <div class="shop-rgba-dark-green rgba-banner">Նոր</div>
-                    </div> 
-                    <div class="product-description product-description-brd">
-                        <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">անուն</span>
-                            </div>    
-                            <div class="product-price">
-                                <span class="title-price">$95.00</span>
-                            </div>
-                        </div>       
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/10.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    </div> 
-                    <div class="product-description product-description-brd">
-                        <div class="overflow-h margin-bottom-5">
-                            <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">անուն</span>
-                            </div>    
-                            <div class="product-price">
-                                <span class="title-price">$95.00</span>
-                            </div>
-                        </div>       
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="product-img">
-                        <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/11.jpg" alt=""></a>
-                        <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                        <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
+                        @if($mainProduct->count == 0)
                         <div class="shop-rgba-red rgba-banner">Առկա չէ պահեստում</div>
-                    </div> 
+                        @endif
+                    </div>
                     <div class="product-description product-description-brd">
                         <div class="overflow-h margin-bottom-5">
                             <div class="pull-left">
-                                <h4 class="title-price"><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                                <span class="gender">անուն</span>
+                                <h4 class="title-price"><a href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">{{$mainProduct->name}}</a></h4>
+                                <span class="gender">{{$mainProduct->type->name}}</span>
                             </div>    
                             <div class="product-price">
-                                <span class="title-price">$95.00</span>
+                                <span class="title-price">${{$mainProduct->price}}</span>
+                                @if($mainProduct->new_price != '')
+                                <span class="title-price line-through">${{$mainProduct->new_price}}</span>
+                                @endif
                             </div>
-                        </div>     
+                        </div>       
                     </div>
-                </li>    
+                </li>
+                @endforeach    
             </ul>
         </div> 
         <!--=== End Illustration v2 ===-->

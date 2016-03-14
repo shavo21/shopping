@@ -18,7 +18,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','count','price','type_id','product_picture1','product_picture2','product_picture3'];
+    protected $fillable = ['name','count','price','new_price','type_id','product_picture1','product_picture2','product_picture3'];
 
     public function type()
     {

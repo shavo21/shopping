@@ -44,4 +44,32 @@ interface ProductInterface{
 	 */
 	public function remove($id);
 
+	/**
+	 * Get products by type_id.
+	 *
+	 * @return products
+	 */
+	public function getProductByeType($id);
+
+	/**
+	 * Get products order by id desc.
+	 *
+	 * @return products
+	 */
+	public function getProductSlide($limit);
+
+	/**
+	* Get products by new_price.
+	*
+	* @return products
+	*/
+	public function getProductByPrice($limit);
+
+	/**
+	* Get products by price.
+	*
+	* @return products
+	*/
+	public function getProductMain($limit);
+
 }

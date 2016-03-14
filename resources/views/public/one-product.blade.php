@@ -27,9 +27,9 @@
         <!-- Breadcrumbs v5 -->
         <div class="container">
             <ul class="breadcrumb-v5">
-                <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-                <li><a href="#">Products</a></li>
-                <li class="active">New</li>
+                <li><a href="{{action('UsersController@getDashboard')}}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{{action('UsersController@getProducts',$product->type->id)}}">{{$product->type->name}}</a></li>
+                <li class="active">{{$product->name}}</li>
             </ul> 
         </div>
         <!-- End Breadcrumbs v5 -->
@@ -41,17 +41,21 @@
                         <!-- Master Slider -->
                         <div class="master-slider ms-skin-default" id="masterslider">
                             <div class="ms-slide">
-                                <img class="ms-brd" src="/assets/img/blank.gif" data-src="/assets/img/blog/28.jpg" alt="lorem ipsum dolor sit">
-                                <img class="ms-thumb" src="/assets/img/blog/28-thumb.jpg" alt="thumb">
+                                <img class="ms-brd" src="/uploads/images/products/{{$product->product_picture1}}" data-src="/uploads/images/products/{{$product->product_picture1}}" alt="lorem ipsum dolor sit">
+                                <img class="ms-thumb" src="/uploads/images/products/{{$product->product_picture1}}" alt="thumb">
                             </div>
+                            @if($product->product_picture2 != '')
                             <div class="ms-slide">
-                                <img src="/assets/img/blank.gif" data-src="/assets/img/blog/29.jpg" alt="lorem ipsum dolor sit">
-                                <img class="ms-thumb" src="/assets/img/blog/29-thumb.jpg" alt="thumb">
+                                <img src="/uploads/images/products/{{$product->product_picture2}}" data-src="/uploads/images/products/{{$product->product_picture2}}" alt="lorem ipsum dolor sit">
+                                <img class="ms-thumb" src="/uploads/images/products/{{$product->product_picture2}}" alt="thumb">
                             </div>
+                            @endif
+                            @if($product->product_picture3 != '')
                             <div class="ms-slide">
-                                <img src="/assets/img/blank.gif" data-src="/assets/img/blog/30.jpg" alt="lorem ipsum dolor sit">
-                                <img class="ms-thumb" src="/assets/img/blog/30-thumb.jpg" alt="thumb">
+                                <img src="/uploads/images/products/{{$product->product_picture3}}" data-src="/uploads/images/products/{{$product->product_picture3}}" alt="lorem ipsum dolor sit">
+                                <img class="ms-thumb" src="/uploads/images/products/{{$product->product_picture3}}" alt="thumb">
                             </div>
+                            @endif
                         </div>
                         <!-- End Master Slider -->
                     </div>
@@ -59,7 +63,7 @@
 
                 <div class="col-md-6">
                     <div class="shop-product-heading">
-                        <h2>Corinna Foley</h2>
+                        <h2>մեր սոցիալական էջերը</h2>
                         <ul class="list-inline shop-product-social">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -68,15 +72,15 @@
                         </ul>
                     </div><!--/end shop product social-->
 
-                    <p>Integer <strong>dapibus ut elit</strong> non volutpat. Integer auctor purus a lectus suscipit fermentum. Vivamus lobortis nec erat consectetur elementum.</p><br>
+                    <p>կարող եք մեզ հետ կապ հաստատել նաև մեր սոցիալական կայքեր միջոցով, ինչպես նաև այցելել մեր ֆիրմային <strong><a href="#">խանութներ</a></strong>:</p><br>
 
                     <ul class="list-inline shop-product-prices margin-bottom-30">
-                        <li class="shop-red">$57.00</li>
-                        <li class="line-through">$70.00</li>
+                        <li class="shop-red">${{$product->price}}</li>
+                        <li class="line-through">${{$product->price}}</li>
                         <li><small class="shop-bg-red time-day-left">4 days left</small></li>
                     </ul><!--/end shop product prices-->
 
-                    <h3 class="shop-product-title">Quantity</h3>
+                    <h3 class="shop-product-title">Քանակ</h3>
                     <div class="margin-bottom-40">
                         <form name="f1" class="product-quantity sm-margin-bottom-20">
                             <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
@@ -85,7 +89,7 @@
                         </form>
                         <button type="button" class="btn-u btn-u-sea-shop btn-u-lg">զամբյուղ</button>
                     </div><!--/end product quantity-->     
-                    <p class="wishlist-category"><strong>Categories:</strong> <a href="#">Clothing,</a> <a href="#">Shoes</a></p>
+                    <p class="wishlist-category"><strong>Տեսակ:</strong> <a href="{{action('UsersController@getProducts',$product->type->id)}}">{{$product->type->name}}</a></p>
                 </div>
             </div><!--/end row-->
         </div>    
@@ -97,11 +101,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 md-margin-bottom-20">
-                    <h2>subscribe to our weekly <strong>newsletter</strong></h2>
+                    <h2>Բաժանորդագրվեք մեր էլեկտրոնային տեղեկագիր</h2>
                 </div>  
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Email your email...">
+                        <input type="text" class="form-control" placeholder="Էլ. փոստ">
                         <span class="input-group-btn">
                             <button class="btn" type="button"><i class="fa fa-envelope-o"></i></button>
                         </span>
