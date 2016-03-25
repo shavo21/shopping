@@ -87,4 +87,15 @@ class TypeService implements TypeInterface{
 		$result = $this->getOne($id)->delete();
 		return $result;
 	}
+
+	/**
+	* Get types by id.
+	*
+	* @return types
+	*/
+	public function getTypes($limit)
+	{
+		$result = $this->type->orderBy('id', 'desc')->limit($limit)->get();
+		return $result;
+	}
 }

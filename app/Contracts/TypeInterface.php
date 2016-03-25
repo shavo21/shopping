@@ -44,4 +44,11 @@ interface TypeInterface{
 	 */
 	public function remove($id);
 
+	/**
+	* Get types by id.
+	*
+	* @return types
+	*/
+	public function getTypes($limit);
+
 }

@@ -72,4 +72,20 @@ interface ProductInterface{
 	*/
 	public function getProductMain($limit);
 
+	/**
+	* Get products group.
+	*
+	* @param $id integer
+	* @return products
+	*/
+	public function getProductByType($id);
+
+	/**
+	* Get products by count.
+	*
+	* @param $count,$limot integer
+	* @return products
+	*/
+	public function getProductByCount($count,$limit);
+
 }
