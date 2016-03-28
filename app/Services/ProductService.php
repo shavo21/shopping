@@ -131,4 +131,28 @@ class ProductService implements ProductInterface{
 		$products = $this->product->orderBy('id', 'desc')->where('new_price','')->with('type')->limit($limit)->get();
 		return $products;
 	}
+
+	/**
+	* Get products group.
+	*
+	* @param $id integer
+	* @return products
+	*/
+	public function getProductByType($id)
+	{
+		$products = $this->product->where('type_id',$id)->get();
+		return $products;
+	}
+
+	/**
+	* Get products by count.
+	*
+	* @param $count,$limot integer
+	* @return products
+	*/
+	public function getProductByCount($count,$limit)
+	{
+		$products = $this->product->where('count','<',$count)->limit($limit)->get();
+		return $products;
+	}
 }

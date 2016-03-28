@@ -27,15 +27,49 @@ class UsersController extends BaseController
     *
     * @return view
     */
-    public function getDashboard(ProductInterface $productRepo)
+    public function getDashboard(ProductInterface $productRepo,TypeInterface $typeRepo)
     {
         $slideProducts = $productRepo->getProductSlide(5);
-        $newPriceProducts = $productRepo->getProductByPrice(2);
-        $mainProducts = $productRepo->getProductSlide(6);
+        $newPriceProducts = $productRepo->getProductByPrice(3);
+        $mainProducts = $productRepo->getProductMain(6);
+        $productCounts = $productRepo->getProductByCount(10,3);
+        $types= $typeRepo->getTypes(3);
+        foreach ($types as $key => $type){
+            $productType = $productRepo->getProductByType($type->id);
+            if(count($productType)>0){
+                $img = $productType[0]->product_picture1;
+            }else{
+                $img = '';
+            }
+            $dataType[$key] = [
+                'count' => count($productType),
+                'type' => $type->name,
+                'img' => $img,
+                'id' => $type->id
+            ];
+        }
+        $i = 0;
+        for($i=0;$i<4;$i++){
+            $bodyProducts[$i] = $slideProducts[$i+1];
+        }
+
+        $j = 0;
+        for($j=0;$j<2;$j++){
+            $productPrices[$j] = $newPriceProducts[$j+1];
+        }
+        $k = 1;
+        for($k=1;$k<4;$k++){
+            $newProducts[$k] = $mainProducts[$k+1];
+        }
         $data = [
             'slideProducts' => $slideProducts,
-            'newPriceProducts' => $newPriceProducts,
-            'mainProducts' => $mainProducts
+            'newPriceProducts' => $productPrices,
+            'mainProducts' => $mainProducts,
+            'productTypes' => $dataType,
+            'bodyProducts' => $bodyProducts,
+            'productPrices' => $newPriceProducts,
+            'newProducts' => $newProducts,
+            'productCounts' => $productCounts
         ];
         return view('public.dashboard',$data);
     }

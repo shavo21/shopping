@@ -94,48 +94,22 @@
 
         <!--=== Illustration v3 ===-->
         <div class="row margin-bottom-50">
+            @foreach($productTypes as $productType)
             <div class="col-md-4 md-margin-bottom-30">
                 <div class="overflow-h">
-                    <a class="illustration-v3 illustration-img1" href="#">
+                    <a class="illustration-v3 illustration-img1" style="background-image: url(/uploads/images/products/{{$productType['img']}}) !important" href="{{action('UsersController@getProducts',$productType['id'])}}">
                         <span class="illustration-bg">
                             <span class="illustration-ads">
                                 <span class="illustration-v3-category">
-                                    <span class="product-category">Տղամարդու</span>
-                                    <span class="product-amount">56 Հատ</span>
+                                    <span class="product-category" style="font-size:25px">{{$productType['type']}}</span>
+                                    <span class="product-amount">{{$productType['count']}} Հատ</span>
                                 </span>    
                             </span>    
                         </span>    
                     </a>
                 </div>    
             </div>
-            <div class="col-md-4 md-margin-bottom-30">
-                <div class="overflow-h">
-                    <a class="illustration-v3 illustration-img2" href="#">
-                        <span class="illustration-bg">
-                            <span class="illustration-ads">
-                                <span class="illustration-v3-category">
-                                    <span class="product-category">Կանացի</span>
-                                    <span class="product-amount">56 հատ</span>
-                                </span>    
-                            </span>    
-                        </span>    
-                    </a>
-                </div>    
-            </div>
-            <div class="col-md-4">
-                <div class="overflow-h">
-                    <a class="illustration-v3 illustration-img3" href="#">
-                        <span class="illustration-bg">
-                            <span class="illustration-ads">
-                                <span class="illustration-v3-category">
-                                    <span class="product-category">Երեխաի</span>
-                                    <span class="product-amount">56 հատ</span>
-                                </span>    
-                            </span>    
-                        </span>    
-                    </a>
-                </div>    
-            </div>
+            @endforeach
         </div>
         <!--=== End Illustration v3 ===-->
 
@@ -145,81 +119,37 @@
 
         <!--=== Illustration v2 ===-->
         <div class="row illustration-v2">
+            @foreach($bodyProducts as $bodyProduct)
             <div class="col-md-3 col-sm-6 md-margin-bottom-30">
                 <div class="product-img">
-                    <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/25.jpg" alt=""></a>
-                    <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
+                    <a href="{{action('UsersController@getProduct',[$bodyProduct->type->id,$bodyProduct->id])}}">
+                        @if($bodyProduct->product_picture3 != '')
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$bodyProduct->product_picture3}}" style="width:265px;height:397px">
+                        @else
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$bodyProduct->product_picture1}}" style="width:265px;height:397px">
+                        @endif
+                    </a>
+                    <a class="product-review" href="{{action('UsersController@getProduct',[$bodyProduct->type->id,$bodyProduct->id])}}">Արագ Անցում</a>
                     <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
+                    @if($mainProduct->count == 0)
+                    <div class="shop-rgba-red rgba-banner">Առկա չէ պահեստում</div>
+                    @else
+                    <div class="shop-rgba-dark-green rgba-banner">նոր</div>
+                    @endif
                 </div>
                 <div class="product-description product-description-brd">
                     <div class="overflow-h margin-bottom-5">
                         <div class="pull-left">
-                            <h4 class="title-price"><a href="shop-ui-inner.html">տեսակ</a></h4>
-                            <span class="gender">անուն</span>
+                            <h4 class="title-price"><a href="{{action('UsersController@getProduct',[$bodyProduct->type->id,$bodyProduct->id])}}">{{$bodyProduct->name}}</a></h4>
+                            <span class="gender">{{$bodyProduct->type->name}}</span>
                         </div>    
                         <div class="product-price">
-                            <span class="title-price">$95.00</span>
+                            <span class="title-price">${{$bodyProduct->price}}</span>
                         </div>
                     </div>    
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 md-margin-bottom-30">
-                <div class="product-img">
-                    <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/09.jpg" alt=""></a>
-                    <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                </div> 
-                <div class="product-description product-description-brd">
-                    <div class="overflow-h margin-bottom-5">
-                        <div class="pull-left">
-                            <h4 class="title-price"><a href="shop-ui-inner.html">տեսակ</a></h4>
-                            <span class="gender">անուն</span>
-                        </div>    
-                        <div class="product-price">
-                            <span class="title-price">$60.00</span>
-                            <span class="title-price line-through">$95.00</span>
-                        </div>
-                    </div>       
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 md-margin-bottom-30">
-                <div class="product-img">
-                    <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/10.jpg" alt=""></a>
-                    <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    <div class="shop-rgba-red rgba-banner">Առկա չէ պահեստում</div>
-                </div> 
-                <div class="product-description product-description-brd">
-                    <div class="overflow-h margin-bottom-5">
-                        <div class="pull-left">
-                            <h4 class="title-price"><a href="shop-ui-inner.html">տեսակ</a></h4>
-                            <span class="gender">անուն</span>
-                        </div>    
-                        <div class="product-price">
-                            <span class="title-price">$95.00</span>
-                        </div>
-                    </div>      
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 md-margin-bottom-30">
-                <div class="product-img">
-                    <a href="shop-ui-inner.html"><img class="full-width img-responsive" src="assets/img/blog/11.jpg" alt=""></a>
-                    <a class="product-review" href="shop-ui-inner.html">Արագ Անցում</a>
-                    <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
-                    <div class="shop-rgba-dark-green rgba-banner">նոր</div>
-                </div> 
-                <div class="product-description product-description-brd">
-                    <div class="overflow-h margin-bottom-5">
-                        <div class="pull-left">
-                            <h4 class="title-price"><a href="shop-ui-inner.html">տեսակ</a></h4>
-                            <span class="gender">անուն</span>
-                        </div>    
-                        <div class="product-price">
-                            <span class="title-price">$95.00</span>
-                        </div>
-                    </div>      
-                </div>
-            </div>
+            @endforeach
         </div> 
         <!--=== End Illustration v2 ===-->
     </div>
@@ -273,118 +203,56 @@
                 <div class="heading heading-v1 margin-bottom-20">
                     <h2>Պահանջվածները</h2>
                 </div>
+                @foreach($productCounts as $productCount)
                 <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/08.jpg" alt="">
+                    <img class="thumb-product-img" src="/uploads/images/products/{{$productCount->product_picture1}}" alt="">
                     <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
+                        <h4><a href="{{action('UsersController@getProduct',[$productCount->type->id,$productCount->id])}}">{{$productCount->name}}</a></h4>
+                        <span class="thumb-product-type">{{$productCount->type->name}}</span>
                     </div>
                     <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$65.00</li>
+                        <li class="thumb-product-price">${{$productCount->price}}</li>
                         <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
                     </ul>    
                 </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/09.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a> </h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$75.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
-                    </ul>    
-                </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/03.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$75.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
-                    </ul>    
-                </div>
+                @endforeach
             </div>
             <div class="col-md-4">
                 <div class="heading heading-v1 margin-bottom-20">
                     <h2>Նոր տեսականի</h2>
                 </div>
+                @foreach($newProducts as $newProduct)
                 <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/02.jpg" alt="">
+                    <img class="thumb-product-img" src="/uploads/images/products/{{$newProduct->product_picture1}}" alt="">
                     <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a> </h4>
-                        <span class="thumb-product-type">Անուն</span>
+                        <h4><a href="{{action('UsersController@getProduct',[$newProduct->type->id,$newProduct->id])}}">{{$newProduct->name}}</a> </h4>
+                        <span class="thumb-product-type">{{$newProduct->type->name}}</span>
                     </div>
                     <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$75.00</li>
+                        <li class="thumb-product-price">${{$newProduct->price}}</li>
                         <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
                     </ul>    
                 </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/10.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$75.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>    
-                </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/06.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price">$65.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>    
-                </div>
+                @endforeach
             </div>
             <div class="col-md-4 padding">
                 <div class="heading heading-v1 margin-bottom-20">
                     <h2>Զեղչվածները</h2>
                 </div>
+                @foreach($productPrices as $productPrice)
                 <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/07.jpg" alt="">
+                    <img class="thumb-product-img" src="/uploads/images/products/{{$productPrice->product_picture1}}" alt="">
                     <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
+                        <h4><a href="{{action('UsersController@getProduct',[$productPrice->type->id,$productPrice->id])}}">{{$productPrice->name}}</a></h4>
+                        <span class="thumb-product-type">{{$productPrice->type->name}}</span>
                     </div>
                     <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price line-through">$75.00</li>
-                        <li class="thumb-product-price">$65.00</li>
+                        <li class="thumb-product-price line-through">${{$productPrice->price}}</li>
+                        <li class="thumb-product-price">${{$productPrice->new_price}}</li>
                         <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
                     </ul>    
                 </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/04.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price line-through">$75.00</li>
-                        <li class="thumb-product-price">$65.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
-                    </ul>    
-                </div>
-                <div class="thumb-product">
-                    <img class="thumb-product-img" src="assets/img/thumb/05.jpg" alt="">
-                    <div class="thumb-product-in">
-                        <h4><a href="shop-ui-inner.html">Տեսակ</a></h4>
-                        <span class="thumb-product-type">Անուն</span>
-                    </div>
-                    <ul class="list-inline overflow-h">
-                        <li class="thumb-product-price line-through">$100.00</li>
-                        <li class="thumb-product-price">$75.00</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
-                    </ul>    
-                </div>
+                @endforeach
             </div>
         </div><!--/end row-->
         <!--=== End Illustration v4 ===-->
