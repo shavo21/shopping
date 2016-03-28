@@ -61,9 +61,9 @@
                     <div class="product-img">
                         <a href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">
                             @if($mainProduct->product_picture2 != '')
-                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture2}}" style="width:265px;height:397px">
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture2}}" style="width:100%;height:397px">
                             @else
-                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture1}}" style="width:265px;height:397px">
+                            <img class="full-width img-responsive" src="/uploads/images/products/{{$mainProduct->product_picture1}}" style="width:100%;height:397px">
                             @endif
                         </a>
                         <a class="product-review" href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">Արագ Անցում</a>
