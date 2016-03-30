@@ -10,7 +10,13 @@
                     </div>
                     <div class="col-sm-6">
                         <ul class="list-inline right-topbar pull-right">
-                            <li><a href="{{action('UsersController@getLogin')}}">Մուտք</a> | <a href="{{action('UsersController@getRegistration')}}">Գրանցում</a></li>
+                            <li>
+                                @if(!Auth::user())
+                                <a href="{{action('UsersController@getLogin')}}">Մուտք</a> | <a href="{{action('UsersController@getRegistration')}}">Գրանցում</a>
+                                @else
+                                <a href="{{action('UsersController@getLogout')}}">Ելք</a> 
+                                @endif
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -39,7 +45,13 @@
                     <!-- Shopping Cart -->
                     <ul class="list-inline shop-badge badge-lists badge-icons pull-right">
                         <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                            @if(!Auth::user())
+                            <a href="{{action('UsersController@getLogin')}}">
+                            @else
+                            <a href="{{action('UsersController@getShopping')}}">
+                            @endif
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
                             <span class="badge badge-sea rounded-x">3</span>
                         </li>
                     </ul>
@@ -87,7 +99,11 @@
 
                         <!-- Gifts -->
                         <li class="dropdown mega-menu-fullwidth">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                            @if(Auth::user())
+                            <a href="{{action('UsersController@getAccount')}}" class="dropdown-toggle">
+                            @else
+                            <a href="{{action('UsersController@getLogin')}}" class="dropdown-toggle">
+                            @endif
                                 Իմ էջը
                             </a>
                         </li>

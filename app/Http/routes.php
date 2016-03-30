@@ -50,6 +50,12 @@ Route::group(['prefix' => 'shop-admin'], function()
 
 Route::get('/','UsersController@getDashboard');
 Route::get('login','UsersController@getLogin');
+Route::post('login','UsersController@postLogin');
+Route::get('logout','UsersController@getLogout');
 Route::get('registration','UsersController@getRegistration');
+Route::post('registration','UsersController@postRegistration');
 Route::get('products/{type}','UsersController@getProducts');
 Route::get('product/{type}/{name}','UsersController@getProduct');
+Route::get('account','UsersController@getAccount');
+Route::post('edit-user','UsersController@postEditUser');
+Route::get('shopping','UsersController@getShopping');

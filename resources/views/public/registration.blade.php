@@ -51,64 +51,35 @@
                 </div>
 
                 <div class="col-md-5">
-                    <form id="sky-form4" class="log-reg-block sky-form">
+                    {!! Form::open(['action' => ['UsersController@postRegistration'], 'class' => 'log-reg-block sky-form', 'role' => 'form', 'files' => 'true' ]) !!}
                         <h2>Ստեղծել նոր էջ</h2>
 
                         <div class="login-input reg-input">
                             <div class="row">
+                                @include('message')
                                 <div class="col-sm-6">
                                     <section>
                                         <label class="input">
-                                            <input type="text" name="firstname" placeholder="First name" class="form-control">
+                                            <input type="text" name="first_name" placeholder="First name" class="form-control">
                                         </label>
                                     </section>
                                 </div>
                                 <div class="col-sm-6">
                                     <section>
                                         <label class="input">
-                                            <input type="text" name="lastname" placeholder="Last name" class="form-control">
+                                            <input type="text" name="last_name" placeholder="Last name" class="form-control">
                                         </label>
                                     </section>        
                                 </div>
                             </div>
-                            <label class="select margin-bottom-15">
-                                <select name="gender" class="form-control">
-                                    <option value="0" selected disabled>Gender</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Other</option>
-                                </select>
-                            </label>
-                            <div class="row margin-bottom-10">
-                                <div class="col-xs-6">
-                                    <label class="select">
-                                        <select name="month" class="form-control">
-                                            <option disabled="" selected="" value="0">Month</option>
-                                            <option>January</option>
-                                            <option>February</option>
-                                            <option>March</option>
-                                            <option>April</option>
-                                            <option>May</option>
-                                            <option>June</option>
-                                            <option>July</option>
-                                            <option>August</option>
-                                            <option>September</option>
-                                            <option>October</option>
-                                            <option>November</option>
-                                            <option>December</option>
-                                        </select>
-                                    </label>    
-                                </div>
-                                <div class="col-xs-3">
-                                    <input type="text" name="day" placeholder="Day" class="form-control">
-                                </div>
-                                <div class="col-xs-3">
-                                    <input type="text" name="year" placeholder="Year" class="form-control">
-                                </div>
-                            </div>
                             <section>
                                 <label class="input">
-                                    <input type="text" name="username" placeholder="Username" class="form-control">
+                                    <input type="text" name="login" placeholder="Username" class="form-control">
+                                </label>
+                            </section> 
+                            <section>
+                                <label class="input">
+                                    <input type="text" name="mobile_phonenumber" placeholder="Phone" class="form-control">
                                 </label>
                             </section>                            
                             <section>
@@ -123,12 +94,12 @@
                             </section>                                
                             <section>
                                 <label class="input">
-                                    <input type="password" name="passwordConfirm" placeholder="Confirm password" class="form-control">
+                                    <input type="password" name="password_confirmation" placeholder="Confirm password" class="form-control">
                                 </label>
                             </section>                                
                         </div>
                         <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Ավելացնել նոր էջ</button>
-                    </form>
+                    {!! Form::close() !!}
 
                     <div class="margin-bottom-20"></div>
                     <p class="text-center">Արդեն ունեք էջ? <a href="{{action('UsersController@getLogin')}}">Մուտք</a></p>

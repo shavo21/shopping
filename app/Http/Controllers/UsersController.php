@@ -7,6 +7,10 @@ use App\Http\Requests;
 use App\Http\Controllers\BaseController;
 use App\Contracts\ProductInterface;
 use App\Contracts\TypeInterface;
+use App\Contracts\UserInterface;
+use Auth;
+use File;
+use Validator;
 
 class UsersController extends BaseController
 {
@@ -19,6 +23,90 @@ class UsersController extends BaseController
     public function getLogin()
     {
         return view('public.login');
+    }
+
+    /**
+    * Login the application user.
+    * POST /login
+    *
+    * @param  Request $request
+    * @return view
+    */
+    public function postLogin(Request $request)
+    {
+        $login = $request->get('login');
+        $password = $request->get('password');
+        if (Auth::attempt(['login' => $login, 'password' => $password]))
+        {
+            return redirect()->action('UsersController@getAccount');
+        }
+        else
+        {
+            return redirect()->back()->with(['error_danger'=> trans('errors.incorrect')]);
+        }
+    }
+
+    /**
+    * Render view my profile.
+    * GET /account
+    *
+    * @return view
+    */
+    public function getAccount()
+    {
+        $data = [
+            'user' => Auth::user(),
+        ];
+        return view('public.account',$data);
+    }
+
+    /**
+    * Post edit-user.
+    * POST /edit-user
+    *
+    * @return view
+    */
+    public function postEditUser(Request $request,UserInterface $userRepo)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'login' => 'required|unique:users,login,'.Auth::user()->id,
+            'mobile_phonenumber' => 'required|numeric',
+            'address' => 'required',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with(['error_danger'=> trans('common.error_user')]);
+        };
+        if(isset($data['profile_picture']) && $data['profile_picture'] != "")
+        {
+            $path = public_path() . '/uploads/images/';
+            $name = str_random();
+            $logoFile = $request->file('profile_picture')->getClientOriginalExtension();
+            $result = $request->file('profile_picture')->move($path, $name.'.'.$logoFile);
+            $data['profile_picture'] = $name.'.'.$logoFile;
+        }
+        if(isset($data['user_key'])){
+            unset($data['user_key']);
+        }
+        if(isset($data['balance'])){
+            unset($data['balance']);
+        }
+        $user = $userRepo->updateOne(Auth::user()->id,$data);
+        return redirect()->back()->with(['error'=> trans('common.error_success')]);
+    }
+
+    /**
+    * User logout from the system.
+    * GET /logout
+    *
+    * @return response
+    */
+    public function getLogout()
+    {
+        Auth::logout();
+        return redirect()->action('UsersController@getLogin');
     }
 
     /**
@@ -86,6 +174,34 @@ class UsersController extends BaseController
     }
 
     /**
+    * Post registration in the user.
+    * POST /registration
+    *
+    * @return view
+    */
+    public function postRegistration(Request $request,UserInterface $userRepo)
+    {
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'login' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'mobile_phonenumber' => 'required|numeric',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with(['error_danger'=> trans('common.error_user')]);
+        };
+        $userKey = rand(1111111111,9999999999);
+        $data['user_key'] = $userKey;
+        $data['password'] = bcrypt($data['password']);
+        $user = $userRepo->createOne($data);
+        return redirect()->back()->with(['error'=> trans('common.error_success')]);
+    }
+
+    /**
     * Render view products.
     * GET /products/{$type}
     *
@@ -119,5 +235,10 @@ class UsersController extends BaseController
             'product' => $product
         ];
         return view('public.one-product',$data);
+    }
+
+    public function getShopping()
+    {
+        return view('public.shopping');
     }
 }

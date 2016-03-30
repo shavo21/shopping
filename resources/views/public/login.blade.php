@@ -51,14 +51,14 @@
                 </div>
 
                 <div class="col-md-5">
-                    <form id="sky-form1" class="log-reg-block sky-form">
+                    {!! Form::open(['action' => ['UsersController@postLogin'], 'class' => 'log-reg-block sky-form', 'id' => 'sky-form1',  'role' => 'form', 'files' => 'true' ]) !!}
                         <h2>Log in to your account</h2>
-
+                        @include('message')
                         <section>
                             <label class="input login-input">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input type="email" placeholder="Մուտքանուն" name="email" class="form-control">
+                                    <input type="tetx" placeholder="Մուտքանուն" name="login" class="form-control">
                                 </div>
                             </label>
                         </section>        
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Մուտք</button>
-                    </form>
+                    {!! Form::close() !!}
                     
                     <div class="margin-bottom-20"></div>
                     <p class="text-center">Չունեք ձեր անհատական էջը? Իմացեք ավելին եւ <a href="{{action('UsersController@getRegistration')}}">Գրանցվեք</a></p>
