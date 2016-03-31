@@ -59,3 +59,4 @@ Route::get('product/{type}/{name}','UsersController@getProduct');
 Route::get('account','UsersController@getAccount');
 Route::post('edit-user','UsersController@postEditUser');
 Route::get('shopping','UsersController@getShopping');
+Route::get('basket/{id}','UsersController@getBasket');

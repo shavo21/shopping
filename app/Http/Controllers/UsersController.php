@@ -11,6 +11,7 @@ use App\Contracts\UserInterface;
 use Auth;
 use File;
 use Validator;
+use Session;
 
 class UsersController extends BaseController
 {
@@ -22,6 +23,13 @@ class UsersController extends BaseController
     */
     public function getLogin()
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp'=>$data]);
+        }
         return view('public.login');
     }
 
@@ -54,6 +62,13 @@ class UsersController extends BaseController
     */
     public function getAccount()
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp'=>$data]);
+        }
         $data = [
             'user' => Auth::user(),
         ];
@@ -105,6 +120,8 @@ class UsersController extends BaseController
     */
     public function getLogout()
     {
+        Session::forget('shopp');
+        Session::forget('count');
         Auth::logout();
         return redirect()->action('UsersController@getLogin');
     }
@@ -117,6 +134,13 @@ class UsersController extends BaseController
     */
     public function getDashboard(ProductInterface $productRepo,TypeInterface $typeRepo)
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp',$data]);
+        }
         $slideProducts = $productRepo->getProductSlide(5);
         $newPriceProducts = $productRepo->getProductByPrice(3);
         $mainProducts = $productRepo->getProductMain(6);
@@ -170,6 +194,13 @@ class UsersController extends BaseController
     */
     public function getRegistration()
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp'=>$data]);
+        }
         return view('public.registration');
     }
 
@@ -210,6 +241,13 @@ class UsersController extends BaseController
     public function getProducts($type,ProductInterface $productRepo,TypeInterface $typeRepo)
     {
         
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp'=>$data]);
+        }
         $products = $productRepo->getProductByeType($type);
         $type = $typeRepo->getOne($type);
         $data = [
@@ -228,6 +266,13 @@ class UsersController extends BaseController
     */
     public function getProduct($type,$id,ProductInterface $productRepo)
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            session(['count' => $count]);
+            $data = json_encode($data);
+            session(['shopp' => $shopp]);
+        }
         $product = $productRepo->getOne($id);
         $data = [
             'type' => $type,
@@ -237,8 +282,38 @@ class UsersController extends BaseController
         return view('public.one-product',$data);
     }
 
+    /**
+    * Render view shopping.
+    * GET /shopping
+    *
+    * @return view
+    */
     public function getShopping()
     {
+        if(!Session::has('shopp')){
+            $data = [];
+            $count = count($data);
+            $data = json_encode($data);
+            session(['count' => $count]);
+            session(['shopp' => $shopp]);
+        }
         return view('public.shopping');
+    }
+
+    public function getBasket($id)
+    {
+        dd(Session::get('count'));
+        $shoppData = Session::get('shopp');
+        $shoppData = json_decode($shoppData);
+        if(!in_array($id, $shoppData)){
+            array_push($shoppData, $id);
+        }
+        $count = count($shoppData);
+        $shoppData = json_encode($shoppData);
+        Session::forget('shopp');
+        Session::forget('count');
+        session(['shopp' => $shopp]);
+        session(['count' => $count]);
+        dd(Session::get('count'));
     }
 }

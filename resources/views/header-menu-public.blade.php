@@ -1,3 +1,4 @@
+    {!! Form::hidden('token', csrf_token(),['class' => 'token']) !!}
     <!--=== Header v5 ===-->   
     <div class="header-v5 header-static">
         <!-- Topbar v3 -->
@@ -52,7 +53,8 @@
                             @endif
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
-                            <span class="badge badge-sea rounded-x">3</span>
+                            <input type='hidden' value="{{Session::get('shop')}}">
+                            <span class="badge badge-sea rounded-x">{{Session::get('count')}}</span>
                         </li>
                     </ul>
                     <!-- End Shopping Cart -->

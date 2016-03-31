@@ -71,6 +71,7 @@
         RevolutionSlider.initRSfullWidth();
 });
 </script>
+<script src="/assets/js/shopping.main.js"></script>
 @yield('scripts')
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

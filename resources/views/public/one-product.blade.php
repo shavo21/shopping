@@ -79,15 +79,8 @@
                         <li class="line-through">${{$product->price}}</li>
                         <li><small class="shop-bg-red time-day-left">4 days left</small></li>
                     </ul><!--/end shop product prices-->
-
-                    <h3 class="shop-product-title">Քանակ</h3>
                     <div class="margin-bottom-40">
-                        <form name="f1" class="product-quantity sm-margin-bottom-20">
-                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty();' value='-'>-</button>
-                            <input type='text' class="quantity-field" name='qty' value="1" id='qty'/>
-                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty").value++;' value='+'>+</button>
-                        </form>
-                        <button type="button" class="btn-u btn-u-sea-shop btn-u-lg">զամբյուղ</button>
+                        <button type="button" class="btn-u btn-u-sea-shop btn-u-lg basket" data-id="{{$product->id}}">զամբյուղ</button>
                     </div><!--/end product quantity-->     
                     <p class="wishlist-category"><strong>Տեսակ:</strong> <a href="{{action('UsersController@getProducts',$product->type->id)}}">{{$product->type->name}}</a></p>
                 </div>
