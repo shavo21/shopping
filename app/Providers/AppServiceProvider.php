@@ -37,5 +37,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Contracts\ProductInterface',
             'App\Services\ProductService'
         );
+
+        $this->app->bind(
+            'App\Contracts\ShoppingInformationInterface',
+            'App\Services\ShoppingInformationService'
+        );
     }
 }
