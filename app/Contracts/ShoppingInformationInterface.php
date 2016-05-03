@@ -1,6 +1,6 @@
 <?php namespace App\Contracts;
 
-interface ProductInterface{
+interface ShoppingInformationInterface{
 	/**
 	 * Get List of all shoppingInformation.
 	 *
@@ -42,4 +42,11 @@ interface ProductInterface{
 	* @return shoppingInformations
 	*/
 	public function getShoppingInformation($id);
+
+	/**
+	* Get shoppingInformations by product-id.
+	*
+	* @return shoppingInformations
+	*/
+	public function getProducts($id);
 }

@@ -15,7 +15,7 @@ class CreateShoppingInformationsTabel extends Migration
         Schema::create('shopping_information', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('products');
+            $table->integer('product_id');
             $table->integer('price');
             $table->enum('shopping',['Yes','No']);
             $table->timestamps();

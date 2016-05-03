@@ -53,8 +53,11 @@
                             @endif
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
-                            <input type='hidden' value="{{Session::get('shop')}}">
-                            <span class="badge badge-sea rounded-x">{{Session::get('count')}}</span>
+                            <input type='hidden' value="">
+                            <span class="badge badge-sea rounded-x" id="boasket_count"></span>
+                            @if(Auth::user())
+                            <span id='userAccount' data-name="{{Auth::user()->id}}"></span>
+                            @endif
                         </li>
                     </ul>
                     <!-- End Shopping Cart -->

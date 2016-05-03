@@ -71,7 +71,9 @@
         RevolutionSlider.initRSfullWidth();
 });
 </script>
+@if(Auth::user())
 <script src="/assets/js/shopping.main.js"></script>
+@endif
 @yield('scripts')
 <!--[if lt IE 9]>
     <script src="assets/plugins/respond.js"></script>

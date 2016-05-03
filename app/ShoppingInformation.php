@@ -18,5 +18,5 @@ class ShoppingInformation extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','products','price','shopping'];
+    protected $fillable = ['user_id','product_id','price','shopping'];
 }

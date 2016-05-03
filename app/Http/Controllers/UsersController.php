@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseController;
 use App\Contracts\ProductInterface;
 use App\Contracts\TypeInterface;
 use App\Contracts\UserInterface;
+use App\Contracts\ShoppingInformationInterface;
 use Auth;
 use File;
 use Validator;
@@ -288,32 +289,37 @@ class UsersController extends BaseController
     *
     * @return view
     */
-    public function getShopping()
+    public function getShopping(ShoppingInformationInterface $infoRepo)
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            $data = json_encode($data);
-            session(['count' => $count]);
-            session(['shopp' => $shopp]);
-        }
+        $info = $infoRepo->getProducts(Auth::user()->id);
+        $data = [];
         return view('public.shopping');
     }
 
-    public function getBasket($id)
+    public function getBasket($id,ShoppingInformationInterface $infoRepo,ProductInterface $productRepo)
     {
-        dd(Session::get('count'));
-        $shoppData = Session::get('shopp');
-        $shoppData = json_decode($shoppData);
-        if(!in_array($id, $shoppData)){
-            array_push($shoppData, $id);
+        $product = $productRepo->getOne($id);
+        if($product->new_price == '' || $product->new_price == 0){
+            $price = $product->price;
+        }else{
+            $price = $product->new_price;
         }
-        $count = count($shoppData);
-        $shoppData = json_encode($shoppData);
-        Session::forget('shopp');
-        Session::forget('count');
-        session(['shopp' => $shopp]);
-        session(['count' => $count]);
-        dd(Session::get('count'));
+        $data = [
+            'user_id' => Auth::user()->id,
+            'product_id' => $id,
+            'price' => $price,
+            'shopping' => 'No'
+        ];
+        $info = $infoRepo->getProducts(Auth::user()->id);
+        $count = count($info);
+        $status = $infoRepo->create($data);
+        return $count;
+    }
+
+    public function getBasketCount($id,ShoppingInformationInterface $infoRepo)
+    {
+        $info = $infoRepo->getProducts(Auth::user()->id);
+        $count = count($info);
+        return $count;
     }
 }

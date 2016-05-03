@@ -87,4 +87,15 @@ class ShoppingInformationService implements ShoppingInformationInterface{
 		$result = $this->shoppingInformation->where('user_id',$id)->get();
 		return $result;
 	}
+
+	/**
+	* Get shoppingInformations by product-id.
+	*
+	* @return shoppingInformations
+	*/
+	public function getProducts($id)
+	{
+		$result = $this->shoppingInformation->where('user_id',$id)->where('shopping','No')->get();
+		return $result;
+	}
 }
