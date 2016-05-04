@@ -230,7 +230,7 @@
                     </div>
                     <ul class="list-inline overflow-h">
                         <li class="thumb-product-price">${{$newProduct->price}}</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
+                        <li class="thumb-product-purchase"><a href="#" class="basket" data-id="{{$newProduct->id}}"><i class="fa fa-shopping-cart"></i></a> </li>
                     </ul>    
                 </div>
                 @endforeach
@@ -249,7 +249,7 @@
                     <ul class="list-inline overflow-h">
                         <li class="thumb-product-price line-through">${{$productPrice->price}}</li>
                         <li class="thumb-product-price">${{$productPrice->new_price}}</li>
-                        <li class="thumb-product-purchase"><a href="#"><i class="fa fa-shopping-cart"></i></a> </li>
+                        <li class="thumb-product-purchase"><a href="#" class="basket" data-id="{{$productPrice->id}}"><i class="fa fa-shopping-cart"></i></a> </li>
                     </ul>    
                 </div>
                 @endforeach

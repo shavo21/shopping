@@ -19,4 +19,9 @@ class ShoppingInformation extends Model
      * @var array
      */
     protected $fillable = ['user_id','product_id','price','shopping'];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product','product_id');
+    }
 }

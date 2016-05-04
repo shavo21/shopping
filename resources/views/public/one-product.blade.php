@@ -75,9 +75,12 @@
                     <p>կարող եք մեզ հետ կապ հաստատել նաև մեր սոցիալական կայքեր միջոցով, ինչպես նաև այցելել մեր ֆիրմային <strong><a href="#">խանութներ</a></strong>:</p><br>
 
                     <ul class="list-inline shop-product-prices margin-bottom-30">
-                        <li class="shop-red">${{$product->price}}</li>
+                        @if($product->new_price  != '' || $product->new_price  != 0)
+                        <li class="shop-red">${{$product->new_price}}</li>
                         <li class="line-through">${{$product->price}}</li>
-                        <li><small class="shop-bg-red time-day-left">4 days left</small></li>
+                        @else
+                        <li class="shop-red">${{$product->price}}</li>
+                        @endif
                     </ul><!--/end shop product prices-->
                     <div class="margin-bottom-40">
                         <button type="button" class="btn-u btn-u-sea-shop btn-u-lg basket" data-id="{{$product->id}}">զամբյուղ</button>

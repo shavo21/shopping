@@ -2,6 +2,7 @@
 
 use App\Contracts\ShoppingInformationInterface;
 use App\ShoppingInformation;
+use Auth;
 
 class ShoppingInformationService implements ShoppingInformationInterface{
 
@@ -95,7 +96,18 @@ class ShoppingInformationService implements ShoppingInformationInterface{
 	*/
 	public function getProducts($id)
 	{
-		$result = $this->shoppingInformation->where('user_id',$id)->where('shopping','No')->get();
+		$result = $this->shoppingInformation->where('user_id',$id)->where('shopping','No')->with('product')->get();
+		return $result;
+	}
+
+	/**
+	* Get shoppingInformations by id.
+	*
+	* @return shoppingInformations
+	*/
+	public function getInformationById($id)
+	{
+		$result = $this->shoppingInformation->where('product_id',$id)->where('shopping','No')->where('user_id',Auth::user()->id)->with('product')->get();
 		return $result;
 	}
 }

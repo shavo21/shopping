@@ -29,21 +29,20 @@
                 <div class="row margin-bottom-5">
                     <div class="col-sm-7 result-category">
                         <h2>{{$type->name}}</h2>
-                        <small class="shop-bg-red badge-results">45 հատ</small>
                     </div>
                     <div class="col-sm-5">
                         <ul class="list-inline clear-both">
                             <li class="sort-list-btn">
-                                <h3>Sort By :</h3>
+                                <h3>Խմբավորել :</h3>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        Popularity <span class="caret"></span>
+                                        Տեսակնաեր <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">All</a></li>
-                                        <li><a href="#">Best Sales</a></li>
-                                        <li><a href="#">Top Last Week Sales</a></li>
-                                        <li><a href="#">New Arrived</a></li>
+                                        <li><a href="#">ԳՆԻ</a></li>
+                                        <li><a href="#">ՏԵՍԱԿԻ</a></li>
+                                        <li><a href="#">ԶԵՂՉԻ</a></li>
+                                        <li><a href="#">ՊԱՀԱՆՋԱՐԿԻ</a></li>
                                     </ul>
                                 </div>
                             </li>

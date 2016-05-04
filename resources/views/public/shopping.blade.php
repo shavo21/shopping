@@ -32,89 +32,43 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Qty</th>
-                                        <th>Total</th>
+                                        <th>Ապրանք</th>
+                                        <th>Զեղչ</th>
+                                        <th>Պահեստում Առկա է</th>
+                                        <th>Արժեք</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($info as $inf)
                                     <tr>
                                         <td class="product-in-table">
-                                            <img class="img-responsive" src="assets/img/thumb/08.jpg" alt="">
+                                            <img class="img-responsive" src="uploads/images/products/{{$inf->product['product_picture1']}}" alt="">
                                             <div class="product-it-in">
-                                                <h3>Double-Breasted</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
+                                                <h3>{{$inf->product['name']}}</h3>
                                             </div>    
                                         </td>
-                                        <td>$ 160.00</td>
                                         <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty1();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty1' value="5" id='qty1'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty1").value++;' value='+'>+</button>
+                                            @if($inf->product['new_price'] != '' || $inf->product['new_price'] != 0)
+                                            <span style="color:green">ԱՅՈ</span>
+                                            @else
+                                            <span style="color:red">ՈՉ</span>
+                                            @endif
                                         </td>
-                                        <td class="shop-red">$ 320.00</td>
                                         <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
+                                            {{$inf->product['count']}} Հատ
+                                        </td>
+                                        <td class="shop-red">
+                                            @if($inf->product['new_price'] != '' || $inf->product['new_price'] != 0)
+                                            $ {{$inf->product['new_price']}}
+                                            @else
+                                            $ {{$inf->product['price']}}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{action('UsersController@getDeleteBasket',$inf->id)}}"><button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button></a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="assets/img/thumb/07.jpg" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty2();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty2' value="3" id='qty2'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty2").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="assets/img/thumb/06.jpg" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty3();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty3' value="1" id='qty3'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty3").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-in-table">
-                                            <img class="img-responsive" src="assets/img/thumb/09.jpg" alt="">
-                                            <div class="product-it-in">
-                                                <h3>Vivamus ligula</h3>
-                                                <span>Sed aliquam tincidunt tempus</span>
-                                            </div>    
-                                        </td>
-                                        <td>$ 160.00</td>
-                                        <td>
-                                            <button type='button' class="quantity-button" name='subtract' onclick='javascript: subtractQty4();' value='-'>-</button>
-                                            <input type='text' class="quantity-field" name='qty4' value="7" id='qty4'/>
-                                            <button type='button' class="quantity-button" name='add' onclick='javascript: document.getElementById("qty4").value++;' value='+'>+</button>
-                                        </td>
-                                        <td class="shop-red">$ 320.00</td>
-                                        <td>
-                                            <button type="button" class="close"><span>&times;</span><span class="sr-only">Close</span></button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -127,26 +81,19 @@
                             <div class="col-sm-3 col-sm-offset-5">
                                 <ul class="list-inline total-result">
                                     <li>
-                                        <h4>Subtotal:</h4>
+                                        <h4>Ապրանքների քանակ:</h4>
                                         <div class="total-result-in">
-                                            <span>$ 1280.00</span>
+                                            <span>{{$count}}</span>
                                         </div>    
                                     </li>    
-                                    <li>
-                                        <h4>Shipping:</h4>
-                                        <div class="total-result-in">
-                                            <span class="text-right">- - - -</span>
-                                        </div>
-                                    </li>
-                                    <li class="divider"></li>
                                     <li class="total-price">
-                                        <h4>Total:</h4>
+                                        <h4>Ընհանուր արժեք:</h4>
                                         <div class="total-result-in">
-                                            <span>$ 1280.00</span>
+                                            <span>$ {{$price}}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <button type="button" class="btn-u btn-u-sea-shop">Apply Coupon</button>
+                                        <button type="button" class="btn-u btn-u-sea-shop">Գնել Հիմա</button>
                                     </li>
                                 </ul>
                             </div>

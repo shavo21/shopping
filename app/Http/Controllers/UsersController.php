@@ -24,13 +24,6 @@ class UsersController extends BaseController
     */
     public function getLogin()
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp'=>$data]);
-        }
         return view('public.login');
     }
 
@@ -63,13 +56,6 @@ class UsersController extends BaseController
     */
     public function getAccount()
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp'=>$data]);
-        }
         $data = [
             'user' => Auth::user(),
         ];
@@ -121,8 +107,6 @@ class UsersController extends BaseController
     */
     public function getLogout()
     {
-        Session::forget('shopp');
-        Session::forget('count');
         Auth::logout();
         return redirect()->action('UsersController@getLogin');
     }
@@ -135,13 +119,6 @@ class UsersController extends BaseController
     */
     public function getDashboard(ProductInterface $productRepo,TypeInterface $typeRepo)
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp',$data]);
-        }
         $slideProducts = $productRepo->getProductSlide(5);
         $newPriceProducts = $productRepo->getProductByPrice(3);
         $mainProducts = $productRepo->getProductMain(6);
@@ -195,13 +172,6 @@ class UsersController extends BaseController
     */
     public function getRegistration()
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp'=>$data]);
-        }
         return view('public.registration');
     }
 
@@ -241,14 +211,6 @@ class UsersController extends BaseController
     */
     public function getProducts($type,ProductInterface $productRepo,TypeInterface $typeRepo)
     {
-        
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp'=>$data]);
-        }
         $products = $productRepo->getProductByeType($type);
         $type = $typeRepo->getOne($type);
         $data = [
@@ -267,13 +229,6 @@ class UsersController extends BaseController
     */
     public function getProduct($type,$id,ProductInterface $productRepo)
     {
-        if(!Session::has('shopp')){
-            $data = [];
-            $count = count($data);
-            session(['count' => $count]);
-            $data = json_encode($data);
-            session(['shopp' => $shopp]);
-        }
         $product = $productRepo->getOne($id);
         $data = [
             'type' => $type,
@@ -292,24 +247,43 @@ class UsersController extends BaseController
     public function getShopping(ShoppingInformationInterface $infoRepo)
     {
         $info = $infoRepo->getProducts(Auth::user()->id);
-        $data = [];
-        return view('public.shopping');
+        $price = 0;
+        foreach ($info as $inf){
+            if($inf->product['new_price'] != '' || $inf->product['new_price'] != 0){
+                $price += $inf->product['new_price'];
+            }else{
+                $price += $inf->product['price'];
+            }
+        }
+        $data = [
+            'info' => $info,
+            'count' =>count($info),
+            'price' => $price,
+        ];
+        return view('public.shopping',$data);
     }
 
     public function getBasket($id,ShoppingInformationInterface $infoRepo,ProductInterface $productRepo)
     {
         $product = $productRepo->getOne($id);
-        if($product->new_price == '' || $product->new_price == 0){
-            $price = $product->price;
+        $information = $infoRepo->getInformationById($id);
+        $infoCount = count($information);
+        if($infoCount == 0){
+            if($product->new_price == '' || $product->new_price == 0){
+                $price = $product->price;
+            }else{
+                $price = $product->new_price;
+            }
+            $data = [
+                'user_id' => Auth::user()->id,
+                'product_id' => $id,
+                'price' => $price,
+                'shopping' => 'No'
+            ];
         }else{
-            $price = $product->new_price;
+            $error = 'true';
+            return $error;
         }
-        $data = [
-            'user_id' => Auth::user()->id,
-            'product_id' => $id,
-            'price' => $price,
-            'shopping' => 'No'
-        ];
         $info = $infoRepo->getProducts(Auth::user()->id);
         $count = count($info);
         $status = $infoRepo->create($data);
@@ -321,5 +295,11 @@ class UsersController extends BaseController
         $info = $infoRepo->getProducts(Auth::user()->id);
         $count = count($info);
         return $count;
+    }
+
+    public function getDeleteBasket($id,ShoppingInformationInterface $infoRepo)
+    {
+        $info = $infoRepo->remove($id);
+        return redirect()->back();
     }
 }

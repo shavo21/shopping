@@ -79,26 +79,9 @@
 
                         <!-- Promotion -->
                         <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
                                 Սպասարկում
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Jeans</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Skinny Jeans</a></li>
-                                        <li><a href="#">Bootcut Jeans</a></li>
-                                        <li><a href="#">Straight Cut Jeans</a></li>
-                                    </ul>    
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:void(0);">Shoes</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Sandals</a></li>
-                                        <li><a href="#">Heels</a></li>
-                                    </ul>    
-                                </li>
-                            </ul>
                         </li>
                         <!-- End Promotion -->
 
@@ -136,5 +119,8 @@
             </div>    
         </div>            
         <!-- End Navbar -->
+    </div>
+    <div class="alert alert-danger" id="error_basket" style="display:none">
+        Ձեր ընտրած ապրանքն արդեն կա զամբյուղում
     </div>
     <!--=== End Header v5 ===-->

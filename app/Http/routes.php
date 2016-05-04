@@ -61,3 +61,4 @@ Route::post('edit-user','UsersController@postEditUser');
 Route::get('shopping','UsersController@getShopping');
 Route::get('basket/{id}','UsersController@getBasket');
 Route::get('basket-count/{id}','UsersController@getBasketCount');
+Route::get('delete-basket/{id}','UsersController@getDeleteBasket');

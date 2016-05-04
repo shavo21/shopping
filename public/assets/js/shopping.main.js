@@ -17,7 +17,12 @@ $(document).ready(function(){
             type: 'GET',
             headers: {'X-CSRF-TOKEN': token},
             success:function(data){
-            	$('#boasket_count').html(data);
+                if(data == 'true'){
+                    $('#error_basket').show();
+                }else{
+                    $('#error_basket').hide();
+                    $('#boasket_count').html(data);
+                }
             }
         })
 	})

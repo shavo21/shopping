@@ -49,4 +49,11 @@ interface ShoppingInformationInterface{
 	* @return shoppingInformations
 	*/
 	public function getProducts($id);
+
+	/**
+	* Get shoppingInformations by id.
+	*
+	* @return shoppingInformations
+	*/
+	public function getInformationById($id);
 }
