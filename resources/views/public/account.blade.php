@@ -41,22 +41,22 @@
                         <div class="col-sm-7 md-margin-bottom-20">
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="first_name" placeholder="Last name" class="form-control" value="{{$user->first_name}}">
+                                    <input type="text" name="first_name" placeholder="Անուն" class="form-control" value="{{$user->first_name}}">
                                 </label>
                             </section> 
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="last_name" placeholder="Last name" class="form-control" value="{{$user->last_name}}">
+                                    <input type="text" name="last_name" placeholder="Ազգանուն" class="form-control" value="{{$user->last_name}}">
                                 </label>
                             </section>
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="mobile_phonenumber" placeholder="Last name" class="form-control" value="{{$user->mobile_phonenumber}}">
+                                    <input type="text" name="mobile_phonenumber" placeholder="Հեռախոս" class="form-control" value="{{$user->mobile_phonenumber}}">
                                 </label>
                             </section>
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="login" placeholder="login" class="form-control" value="{{$user->login}}">
+                                    <input type="text" name="login" placeholder="Մուտքանուն" class="form-control" value="{{$user->login}}">
                                 </label>
                             </section>
                             <section class="col-sm-6">
@@ -66,17 +66,17 @@
                             </section>
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="balance" placeholder="balance" class="form-control" value="{{$user->balance}}" disabled>
+                                    <input type="text" name="balance" placeholder="Հաշիվ" class="form-control" value="{{$user->balance}}" disabled>
                                 </label>
                             </section>
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <input type="text" name="address" placeholder="address" class="form-control" value="{{$user->address}}">
+                                    <input type="text" name="address" placeholder="Հասցե" class="form-control" value="{{$user->address}}">
                                 </label>
                             </section>
                             <section class="col-sm-6">
                                 <label class="input">
-                                    <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Edit</button>
+                                    <button class="btn-u btn-u-sea-shop btn-block margin-bottom-20" type="submit">Հաստատել</button>
                                 </label>
                             </section>
                         </div>

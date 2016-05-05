@@ -102,7 +102,7 @@
 	<div class="form-group">
 		{!! Form::label('role', trans('common.role'), ['class' => 'col-sm-3 control-label no-padding-right']) !!}
 		<div class="col-sm-9">
-			{!! Form::select('role', [ 'user' => 'User', 'shop_admin' => 'Admin' ], null, ['id' => 'role', 'class' => 'col-xs-10 col-sm-5']) !!}
+			{!! Form::select('role', [ 'user' => 'Հաճախորդ', 'shop_admin' => 'Սպասարկող' ], null, ['id' => 'role', 'class' => 'col-xs-10 col-sm-5']) !!}
 		</div>
 	</div>
 

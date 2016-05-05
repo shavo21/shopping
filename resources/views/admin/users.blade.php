@@ -27,7 +27,7 @@
 							</div>
 							<div class="form-group">
 								<h1>
-									trans('common.users_table')
+									{{trans('common.users_table')}}
 								</h1>
 							</div>
 							<table id="simple-table" class="table table-striped table-bordered table-hover">

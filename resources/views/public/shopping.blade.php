@@ -20,13 +20,14 @@
     <!--=== Content Medium Part ===-->
     <div class="content-md margin-bottom-30">
         <div class="container">
-            <form class="shopping-cart" action="#">
-                <div>
-                    <div class="header-tags">            
-                        <div class="overflow-h">
-                            <h2>Ձեր ընտրած ապրանքները</h2>
-                        </div>    
-                    </div>
+            @include('message')
+            <div>
+                <div class="header-tags">            
+                    <div class="overflow-h">
+                        <h2>Ձեր ընտրած ապրանքները</h2>
+                    </div>    
+                </div>
+                <span class="shopping-cart">
                     <section>
                         <div class="table-responsive">
                             <table class="table table-striped">
@@ -80,6 +81,7 @@
                             </div>
                             <div class="col-sm-3 col-sm-offset-5">
                                 <ul class="list-inline total-result">
+                                    {!! Form::open(['action' => ['UsersController@postShoppingProduct']]) !!}
                                     <li>
                                         <h4>Ապրանքների քանակ:</h4>
                                         <div class="total-result-in">
@@ -93,15 +95,22 @@
                                         </div>
                                     </li>
                                     <li>
+                                        @if($count == 0)
                                         <button type="button" class="btn-u btn-u-sea-shop">Գնել Հիմա</button>
+                                        @else
+                                        <button type="submit" class="btn-u btn-u-sea-shop">Գնել Հիմա</button>
+                                        @endif
                                     </li>
+                                    <input type='hidden' name='price' value='{{$price}}'>
+                                    <input type='hidden' name='idsProduct' value='{{$idsProduct}}'>
+                                    <input type='hidden' name='idsInfo' value='{{$idsInfo}}'>
+                                    {!! Form::close() !!}
                                 </ul>
                             </div>
-
                         </div>
-                    </div>    
-                </div>
-            </form>
+                    </div>
+                </span>                 
+            </div> 
         </div><!--/end container-->
     </div>
     <!--=== End Content Medium Part ===-->

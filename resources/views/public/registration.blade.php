@@ -60,41 +60,41 @@
                                 <div class="col-sm-6">
                                     <section>
                                         <label class="input">
-                                            <input type="text" name="first_name" placeholder="First name" class="form-control">
+                                            <input type="text" name="first_name" placeholder="Անուն" class="form-control">
                                         </label>
                                     </section>
                                 </div>
                                 <div class="col-sm-6">
                                     <section>
                                         <label class="input">
-                                            <input type="text" name="last_name" placeholder="Last name" class="form-control">
+                                            <input type="text" name="last_name" placeholder="Ազգանուն" class="form-control">
                                         </label>
                                     </section>        
                                 </div>
                             </div>
                             <section>
                                 <label class="input">
-                                    <input type="text" name="login" placeholder="Username" class="form-control">
+                                    <input type="text" name="login" placeholder="Մուտքանուն" class="form-control">
                                 </label>
                             </section> 
                             <section>
                                 <label class="input">
-                                    <input type="text" name="mobile_phonenumber" placeholder="Phone" class="form-control">
+                                    <input type="text" name="mobile_phonenumber" placeholder="Հեռախոս" class="form-control">
                                 </label>
                             </section>                            
                             <section>
                                 <label class="input">
-                                    <input type="email" name="email" placeholder="Email address" class="form-control">
+                                    <input type="email" name="email" placeholder="Էլ. փոստ" class="form-control">
                                 </label>
                             </section>                                
                             <section>
                                 <label class="input">
-                                    <input type="password" name="password" placeholder="Password" id="password" class="form-control">
+                                    <input type="password" name="password" placeholder="Գաղտնաբառ" id="password" class="form-control">
                                 </label>
                             </section>                                
                             <section>
                                 <label class="input">
-                                    <input type="password" name="password_confirmation" placeholder="Confirm password" class="form-control">
+                                    <input type="password" name="password_confirmation" placeholder="Գաղտնաբառի կրկնություն" class="form-control">
                                 </label>
                             </section>                                
                         </div>

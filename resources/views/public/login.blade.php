@@ -52,7 +52,7 @@
 
                 <div class="col-md-5">
                     {!! Form::open(['action' => ['UsersController@postLogin'], 'class' => 'log-reg-block sky-form', 'id' => 'sky-form1',  'role' => 'form', 'files' => 'true' ]) !!}
-                        <h2>Log in to your account</h2>
+                        <h2>Մուտք ձեր անձնական էջ</h2>
                         @include('message')
                         <section>
                             <label class="input login-input">

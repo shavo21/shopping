@@ -249,17 +249,23 @@ class UsersController extends BaseController
     {
         $info = $infoRepo->getProducts(Auth::user()->id);
         $price = 0;
+        $idsProduct = '';
+        $idsInfo = '';
         foreach ($info as $inf){
             if($inf->product['new_price'] != '' || $inf->product['new_price'] != 0){
                 $price += $inf->product['new_price'];
             }else{
                 $price += $inf->product['price'];
             }
+            $idsProduct = $idsProduct.','.$inf->product['id'];
+            $idsInfo = $idsInfo.','.$inf->id;
         }
         $data = [
             'info' => $info,
             'count' =>count($info),
             'price' => $price,
+            'idsProduct' => $idsProduct,
+            'idsInfo' => $idsInfo,
         ];
         return view('public.shopping',$data);
     }
@@ -305,7 +311,7 @@ class UsersController extends BaseController
     }
 
 
-    public function getResult(Request $request)
+    public function getResult(Request $request,UserInterface $userRepo)
     {
         $PayPalConfig = config('paypal.configPaypal');
         $PayPal = new angelleye\PayPal\PayPal($PayPalConfig);
@@ -319,7 +325,16 @@ class UsersController extends BaseController
             'BUILD' => 'Day'
         ];
         $result = $PayPal->CreateRecurringPaymentsProfile($result);
-        dd($result);
+        if($result){
+
+            $data=[
+                'balance' => Auth::user()->balance + 200,
+            ];
+            $result = $userRepo->updateOne(Auth::user()->id,$data);
+            if($result){
+                return redirect()->action('UsersController@getAccount');
+            }
+        }
     }
     public function getPaymant()
     {
@@ -410,5 +425,28 @@ class UsersController extends BaseController
         $_SESSION['SetExpressCheckoutResult'] = $PayPal -> SetExpressCheckout($PayPalRequest);
         echo '<a href="' . $_SESSION['SetExpressCheckoutResult']['REDIRECTURL'] . '">Click here to continue.</a><br /><br />';
         echo '<pre/>';
+    }
+
+    public function postShoppingProduct(Request $request,ShoppingInformationInterface $infoRepo,UserInterface $userRepo,ProductInterface $productRepo)
+    {
+        $data = $request->all();
+        if($request->get('price') > Auth::user()->balance){
+            return redirect()->back()->with('error_danger','Դուք չունեք բավարար գումար գնում կատարելու համար');
+        }
+        $productsId = explode(',',$data['idsProduct']);
+        unset($productsId[0]);
+        $infosId = explode(',',$data['idsInfo']);
+        unset($infosId[0]);
+        foreach ($productsId as $productId){
+            $product = $productRepo->getOne($productId);
+            $count = $product->count - 1;
+            $result = $productRepo->update(['count' => $count],$productId);
+        }
+        foreach ($infosId as $infoId){
+            $result = $infoRepo->update(['shopping' => 'Yes'],$infoId);
+        }
+        $balance = Auth::user()->balance-$data['price'];
+        $result = $userRepo->updateOne(Auth::user()->id,['balance'=>$balance]);
+        return redirect()->back()->with('error','Ձեր գործարքը հաջողությամբ կատարվեց');
     }
 }
