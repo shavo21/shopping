@@ -57,7 +57,9 @@
                             <div class="product-img product-img-brd">
                                 <a href="{{action('UsersController@getProduct',[$product->type->id,$product->id])}}"><img class="full-width img-responsive" src="/uploads/images/products/{{$product->product_picture1}}" alt=""></a>
                                 <a class="product-review" href="{{action('UsersController@getProduct',[$product->type->id,$product->id])}}">Արագ Անցում</a>
+                                @if($product->count !=0)
                                 <a class="add-to-cart basket" href="#" data-id="{{$product->id}}"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
+                                @endif
                             </div> 
                             <div class="product-description product-description-brd margin-bottom-30">
                                 <div class="overflow-h margin-bottom-5">

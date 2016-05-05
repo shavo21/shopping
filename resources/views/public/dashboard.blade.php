@@ -67,7 +67,9 @@
                             @endif
                         </a>
                         <a class="product-review" href="{{action('UsersController@getProduct',[$mainProduct->type->id,$mainProduct->id])}}">Արագ Անցում</a>
+                        @if($mainProduct->count != 0)
                         <a class="add-to-cart basket" href="#" data-id="{{$mainProduct->id}}"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
+                        @endif
                         @if($mainProduct->count == 0)
                         <div class="shop-rgba-red rgba-banner">Առկա չէ պահեստում</div>
                         @endif
@@ -130,7 +132,9 @@
                         @endif
                     </a>
                     <a class="product-review" href="{{action('UsersController@getProduct',[$bodyProduct->type->id,$bodyProduct->id])}}">Արագ Անցում</a>
+                    @if($mainProduct->count != 0)
                     <a class="add-to-cart basket" href="#" data-id="{{$bodyProduct->id}}"><i class="fa fa-shopping-cart"></i>զամբյուղ</a>
+                    @endif
                     @if($mainProduct->count == 0)
                     <div class="shop-rgba-red rgba-banner">Առկա չէ պահեստում</div>
                     @else
@@ -212,7 +216,9 @@
                     </div>
                     <ul class="list-inline overflow-h">
                         <li class="thumb-product-price">${{$productCount->price}}</li>
+                        @if($productCount->count != 0)
                         <li class="thumb-product-purchase"><a href="#" class="basket" data-id="{{$productCount->id}}"><i class="fa fa-shopping-cart"></i></a> </li>
+                        @endif
                     </ul>    
                 </div>
                 @endforeach
@@ -230,7 +236,9 @@
                     </div>
                     <ul class="list-inline overflow-h">
                         <li class="thumb-product-price">${{$newProduct->price}}</li>
+                        @if($newProduct->count != 0)
                         <li class="thumb-product-purchase"><a href="#" class="basket" data-id="{{$newProduct->id}}"><i class="fa fa-shopping-cart"></i></a> </li>
+                        @endif
                     </ul>    
                 </div>
                 @endforeach
@@ -249,7 +257,9 @@
                     <ul class="list-inline overflow-h">
                         <li class="thumb-product-price line-through">${{$productPrice->price}}</li>
                         <li class="thumb-product-price">${{$productPrice->new_price}}</li>
+                        @if($productPrice->count != 0)
                         <li class="thumb-product-purchase"><a href="#" class="basket" data-id="{{$productPrice->id}}"><i class="fa fa-shopping-cart"></i></a> </li>
+                        @endif
                     </ul>    
                 </div>
                 @endforeach

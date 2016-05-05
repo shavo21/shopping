@@ -62,3 +62,5 @@ Route::get('shopping','UsersController@getShopping');
 Route::get('basket/{id}','UsersController@getBasket');
 Route::get('basket-count/{id}','UsersController@getBasketCount');
 Route::get('delete-basket/{id}','UsersController@getDeleteBasket');
+Route::get('result','UsersController@getResult');
+Route::get('paymant','UsersController@getPaymant');

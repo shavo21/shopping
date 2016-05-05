@@ -83,7 +83,11 @@
                         @endif
                     </ul><!--/end shop product prices-->
                     <div class="margin-bottom-40">
+                        @if($product->count !=0)
                         <button type="button" class="btn-u btn-u-sea-shop btn-u-lg basket" data-id="{{$product->id}}">զամբյուղ</button>
+                        @else
+                        <span style="color:red">Առկա չէ պահեստում</span>
+                        @endif
                     </div><!--/end product quantity-->     
                     <p class="wishlist-category"><strong>Տեսակ:</strong> <a href="{{action('UsersController@getProducts',$product->type->id)}}">{{$product->type->name}}</a></p>
                 </div>
